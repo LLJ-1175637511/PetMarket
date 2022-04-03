@@ -31,5 +31,3 @@ implementation 'com.github.Ye-Miao:StatusBarUtil:1.7.5'
 // 加上  maven { url 'https://developer.huawei.com/repo/'}
 implementation 'com.huawei.hms:scanplus:1.1.1.301'
 
-
-//本库git地址 implementation 'com.github.LLJ-1175637511:IOT-Libruary:v1.0.1'

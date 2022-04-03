@@ -9,7 +9,6 @@ object ECLib {
 
     private lateinit var context: Context
 
-
     private var isInit = false
 
     @JvmStatic

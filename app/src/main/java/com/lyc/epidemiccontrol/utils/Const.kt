@@ -7,5 +7,5 @@ object Const{
     const val SPUserID = "sp_user_id"
 
     const val SPNet = "sp_net"
-    const val SPToken = "sp_token"
+    const val SPNetToken = "sp_net_token"
 }

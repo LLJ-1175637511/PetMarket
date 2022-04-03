@@ -76,13 +76,11 @@ abstract class BaseLoginActivity<DB : ViewDataBinding> : BaseActivity<DB>() {
     /**
      * 保存用户名 密码
      */
-    fun savedUserPwdSp(name: String, pwd: String, token: String) {
+    fun savedUserPwdSp(name: String, pwd: String,userId:String) {
         ECLib.getSP(Const.SPUser).save {
-            putString(Const.SPUserPwd, name)
-            putString(Const.SPUserName, pwd)
-        }
-        ECLib.getSP(Const.SPNet).save {
-            putString(Const.SPToken,token)
+            putString(Const.SPUserName, name)
+            putString(Const.SPUserPwd, pwd)
+            putString(Const.SPUserID, userId)
         }
     }
 
