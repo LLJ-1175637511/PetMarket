@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">社区防疫监控</string>
+    <string name="title_manager">防疫</string>
+    <string name="title_policy">政策</string>
+    <string name="title_diagnosis">确诊</string>
+    <string name="title_user">用户</string>
+</resources>
