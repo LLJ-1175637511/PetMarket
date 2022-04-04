@@ -9,4 +9,8 @@ interface UserServer {
     @GET("Login/GetLoginUser")
     fun login(@QueryMap map: Map<String, String>): Call<BaseBean>
 
+    @FormUrlEncoded
+    @POST("Account/CreateUser")
+    fun register(@QueryMap map: Map<String, String>): Call<BaseBean>
+
 }

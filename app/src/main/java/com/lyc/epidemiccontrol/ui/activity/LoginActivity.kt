@@ -2,8 +2,11 @@ package com.lyc.epidemiccontrol.ui.activity
 
 import android.Manifest
 import android.app.Activity
+import android.content.Intent
+import android.os.Bundle
 import androidx.lifecycle.lifecycleScope
 import com.lyc.epidemiccontrol.R
+import com.lyc.epidemiccontrol.app.MyApplication
 import com.lyc.epidemiccontrol.data.bean.LoginBean
 import com.lyc.epidemiccontrol.databinding.ActivityLoginBinding
 import com.lyc.epidemiccontrol.ext.baseConverter
@@ -39,6 +42,9 @@ class LoginActivity : BaseLoginActivity<ActivityLoginBinding>() {
                 ToastUtils.toastShort("第三方登录功能开发中")
             }
         }
+        mDataBinding.tvRegister.setOnClickListener {
+            startActivityAndFinish<RegisterActivity>()
+        }
     }
 
     private fun <T : Activity> login(username: String, password: String, target: Class<T>) {
@@ -58,10 +64,16 @@ class LoginActivity : BaseLoginActivity<ActivityLoginBinding>() {
                     )
                 )
             }?.let {
-                savedUserPwdSp(username, password,"")
-                startActivityAndFinish<MainActivity>()
+                savedUserPwdSp(username, password,it.userNum)
+                val i = Intent(this@LoginActivity,MainActivity::class.java)
+                i.putExtra(userInfo,it)
+                startActivity(i)
+                finish()
             }
         }
     }
 
+    companion object{
+        const val userInfo = "userInfo"
+    }
 }

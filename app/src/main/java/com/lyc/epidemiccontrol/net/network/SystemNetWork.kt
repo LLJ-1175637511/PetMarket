@@ -6,8 +6,10 @@ import retrofit2.await
 
 object SystemNetWork {
 
-    private val userServer by lazy { RetrofitCreator.create<UserServer>() }
+    private val server by lazy { RetrofitCreator.create<UserServer>() }
 
-    suspend fun login(map: Map<String, String>) = userServer.login(map).await()
+    suspend fun login(map: Map<String, String>) = server.login(map).await()
+
+    suspend fun register(map: Map<String, String>) = server.register(map).await()
 
 }

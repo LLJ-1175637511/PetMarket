@@ -6,4 +6,6 @@ object SystemRepository {
 
     suspend fun loginRequest(map: Map<String, String>) = SystemNetWork.login(map)
 
+    suspend fun registerRequest(map: Map<String, String>) = SystemNetWork.register(map)
+
 }
