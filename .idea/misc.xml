@@ -14,6 +14,10 @@
         <entry key="..\:/E/Android/Graduation2022/EpidemicControl/app/src/main/res/layout/fragment_user.xml" value="0.22327898550724637" />
         <entry key="..\:/E/Android/Graduation2022/EpidemicControl/app/src/main/res/layout/toolbar.xml" value="0.22327898550724637" />
         <entry key="..\:/E/Android/Graduation2022/EpidemicControl/app/src/main/res/menu/bottom_nav_menu.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/activity_login.xml" value="0.15896739130434784" />
+        <entry key="app/src/main/res/layout/fragment_main_pet.xml" value="0.14583333333333334" />
+        <entry key="app/src/main/res/layout/fragment_user.xml" value="0.25" />
+        <entry key="app/src/main/res/menu/bottom_nav_menu.xml" value="0.2953125" />
       </map>
     </option>
   </component>

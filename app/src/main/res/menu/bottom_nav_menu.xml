@@ -2,22 +2,17 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/navigation_manager"
-        android:icon="@drawable/ic_home_black_24dp"
-        android:title="@string/title_manager" />
+        android:id="@+id/navigation_main"
+        android:icon="@mipmap/main_pet"
+        android:title="@string/title_main" />
 
     <item
-        android:id="@+id/navigation_policy"
-        android:icon="@drawable/ic_dashboard_black_24dp"
-        android:title="@string/title_policy" />
-
-    <item
-        android:id="@+id/navigation_diagnosis"
-        android:icon="@drawable/ic_notifications_black_24dp"
-        android:title="@string/title_diagnosis" />
+        android:id="@+id/navigation_square"
+        android:icon="@mipmap/square"
+        android:title="@string/title_square" />
 
     <item
         android:id="@+id/navigation_user"
-        android:icon="@drawable/ic_notifications_black_24dp"
+        android:icon="@mipmap/mine"
         android:title="@string/title_user" />
 </menu>

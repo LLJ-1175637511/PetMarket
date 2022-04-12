@@ -5,9 +5,10 @@
 
     <color name="grey_dark">#333232</color>
     <color name="grey">#272626</color>
-    <color name="colorPrimary">#FF9800</color>
-    <color name="colorPrimaryDark">#FF9800</color>
-    <color name="colorAccent">#FF9800</color>
+    <color name="colorPrimary">#00acff</color>
+    <color name="colorPrimaryDark">#00acff</color>
+    <color name="colorAccent">#00acff</color>
+    <color name="orange">#FF9800</color>
 
     <color name="qq_blue">#00acff</color>
 

@@ -3,29 +3,23 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/navigation_manager">
+    app:startDestination="@+id/navigation_square">
 
     <fragment
-        android:id="@+id/navigation_manager"
-        android:name="com.lyc.epidemiccontrol.ui.fragment.ManagerFragment"
-        android:label="@string/title_manager"
-        tools:layout="@layout/fragment_manager" />
+        android:id="@+id/navigation_square"
+        android:name="com.qyl.petmarket.ui.fragment.SquareFragment"
+        android:label="@string/title_square"
+        tools:layout="@layout/fragment_square" />
 
     <fragment
-        android:id="@+id/navigation_policy"
-        android:name="com.lyc.epidemiccontrol.ui.fragment.PolicyFragment"
-        android:label="@string/title_policy"
-        tools:layout="@layout/fragment_policy" />
-
-    <fragment
-        android:id="@+id/navigation_diagnosis"
-        android:name="com.lyc.epidemiccontrol.ui.fragment.DiagnosisFragment"
-        android:label="@string/title_diagnosis"
-        tools:layout="@layout/fragment_diagnosis" />
+        android:id="@+id/navigation_main"
+        android:name="com.qyl.petmarket.ui.fragment.MainPetFragment"
+        android:label="@string/title_main"
+        tools:layout="@layout/fragment_main_pet" />
 
     <fragment
         android:id="@+id/navigation_user"
-        android:name="com.lyc.epidemiccontrol.ui.fragment.UserFragment"
+        android:name="com.qyl.petmarket.ui.fragment.UserFragment"
         android:label="@string/title_user"
         tools:layout="@layout/fragment_user" />
 </navigation>
