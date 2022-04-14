@@ -94,7 +94,7 @@
             app:layout_constraintTop_toBottomOf="@id/clUserInfo" />
 
         <TextView
-            android:id="@+id/tvMyDynamic"
+            android:id="@+id/tvDynamic"
             android:layout_width="0dp"
             android:layout_height="60dp"
             android:layout_marginStart="5dp"
@@ -131,7 +131,7 @@
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tvMyDynamic" />
+            app:layout_constraintTop_toBottomOf="@id/tvDynamic" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

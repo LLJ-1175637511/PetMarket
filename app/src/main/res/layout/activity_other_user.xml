@@ -3,30 +3,36 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:background="@color/dialogBack"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@color/dialogBack">
 
-        <include layout="@layout/toolbar" android:id="@+id/toolbar"/>
+        <include
+            android:id="@+id/toolbar"
+            layout="@layout/toolbar" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/clUserInfo"
             android:layout_width="0dp"
-            android:layout_height="120dp"
+            android:layout_height="80dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="5dp"
+            android:background="@drawable/shape_rect_white"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/toolbar">
 
             <androidx.constraintlayout.utils.widget.ImageFilterView
                 android:id="@+id/ivHead"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
-                app:roundPercent="1"
-                android:src="@mipmap/head_icon"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
                 android:layout_marginStart="20dp"
-                android:layout_marginTop="20dp"
+                android:src="@mipmap/other_user"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:roundPercent="1" />
 
             <TextView
                 android:id="@+id/tvUserName"
@@ -36,128 +42,80 @@
                 android:layout_marginTop="5dp"
                 android:text="龍龍"
                 android:textColor="@color/black"
-                android:textSize="22sp"
+                android:textSize="18sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toEndOf="@+id/ivHead"
                 app:layout_constraintTop_toTopOf="@+id/ivHead" />
 
             <TextView
-                android:id="@+id/imageView"
+                android:id="@+id/tvLikeCount"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="20dp"
-                android:drawableTop="@mipmap/pet"
+                android:drawableTop="@drawable/ic_baseline_favorite_24"
                 android:gravity="center"
-                android:text="5天"
-                app:layout_constraintBottom_toBottomOf="@+id/ivHead"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/ivHead" />
+                android:text="5"
+                app:layout_constraintBottom_toBottomOf="@+id/tvUserInfo"
+                app:layout_constraintEnd_toEndOf="parent" />
 
             <TextView
-                android:id="@+id/tvNum"
-                android:layout_width="wrap_content"
+                android:id="@+id/tvUserInfo"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
+                android:layout_marginEnd="15dp"
+                android:ellipsize="end"
+                android:maxLines="1"
                 android:paddingTop="2dp"
                 android:paddingEnd="8dp"
                 android:paddingBottom="2dp"
                 android:text="辽宁省锦州市古塔区"
                 android:textColor="@color/grey"
-                android:textSize="14sp"
+                android:textSize="12sp"
                 app:layout_constraintBottom_toBottomOf="@+id/ivHead"
                 app:layout_constraintStart_toStartOf="@+id/tvUserName"
                 app:layout_constraintTop_toBottomOf="@+id/tvUserName" />
-       </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <View
-            android:id="@+id/divider"
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginStart="24dp"
-            android:layout_marginEnd="24dp"
-            android:background="?android:attr/listDivider"
-            app:layout_constraintBottom_toBottomOf="@+id/clUserInfo"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <TextView
-            android:id="@+id/tvInfo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="男    22   |   学生   |   辽宁"
-            android:layout_marginTop="25dp"
-            android:layout_marginStart="20dp"
+            android:id="@+id/tvLike"
+            android:layout_width="0dp"
+            android:layout_height="60dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="5dp"
+            android:background="@drawable/shape_rect_white"
+            android:drawableEnd="@drawable/ic_baseline_keyboard_arrow_right_24"
             android:drawablePadding="12dp"
-            android:gravity="center"
+            android:gravity="center_vertical"
+            android:paddingStart="15dp"
+            android:text="ta的宠物"
             android:textColor="@color/grey_dark"
-            android:textSize="14sp"
-            android:drawableStart="@mipmap/user_fix"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/clUserInfo" />
 
         <TextView
-            android:id="@+id/tvPhone"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="电话：12345678910"
-            android:layout_marginTop="25dp"
-            android:layout_marginStart="20dp"
+            android:id="@+id/tvDynamic"
+            android:layout_width="0dp"
+            android:layout_height="60dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="5dp"
+            android:background="@drawable/shape_rect_white"
+            android:drawableEnd="@drawable/ic_baseline_keyboard_arrow_right_24"
             android:drawablePadding="12dp"
-            android:gravity="center"
+            android:gravity="center_vertical"
+            android:paddingStart="15dp"
+            android:text="ta的动态"
             android:textColor="@color/grey_dark"
-            android:textSize="14sp"
-            android:drawableStart="@mipmap/user_phone"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tvInfo" />
-
-        <TextView
-            android:id="@+id/tvEmail"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="邮箱：5435154@qq.com"
-            android:layout_marginTop="25dp"
-            android:layout_marginStart="20dp"
-            android:drawablePadding="12dp"
-            android:gravity="center"
-            android:textColor="@color/grey_dark"
-            android:textSize="14sp"
-            android:drawableStart="@mipmap/user_email"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tvPhone" />
-
-        <TextView
-            android:id="@+id/tvHobby"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="喜好："
-            android:layout_marginTop="25dp"
-            android:layout_marginStart="20dp"
-            android:drawablePadding="12dp"
-            android:gravity="center"
-            android:textColor="@color/grey_dark"
-            android:textSize="14sp"
-            android:drawableStart="@mipmap/hobby"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tvEmail" />
-
-        <TextView
-            android:id="@+id/tvQuit"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="退 出 登 录"
-            android:textColor="@color/white"
-            android:paddingTop="8dp"
-            android:layout_marginBottom="60dp"
-            android:paddingBottom="8dp"
-            android:paddingStart="20dp"
-            android:paddingEnd="20dp"
             android:textSize="16sp"
-            android:background="@drawable/shape_rect_blue_low"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"/>
-
-
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvLike" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

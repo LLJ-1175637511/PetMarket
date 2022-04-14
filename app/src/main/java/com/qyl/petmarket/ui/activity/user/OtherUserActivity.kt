@@ -1,38 +1,64 @@
 package com.qyl.petmarket.ui.activity.user
 
+import androidx.lifecycle.lifecycleScope
+import cn.leancloud.LCQuery
 import cn.leancloud.LCUser
 import com.qyl.petmarket.R
-import com.qyl.petmarket.databinding.ActivityUserBinding
-import com.qyl.petmarket.ext.string
+import com.qyl.petmarket.databinding.ActivityOtherUserBinding
 import com.qyl.petmarket.ui.activity.BaseActivity
 import com.qyl.petmarket.utils.LCUtils
+import com.qyl.petmarket.utils.ToastUtils
+import kotlinx.android.synthetic.main.activity_other_user.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
-class OtherUserActivity : BaseActivity<ActivityUserBinding>() {
+class OtherUserActivity : BaseActivity<ActivityOtherUserBinding>() {
 
-    override fun getLayoutId() = R.layout.activity_user
+    override fun getLayoutId() = R.layout.activity_other_user
+
+    private var objId = ""
 
     override fun init() {
         super.init()
-        val user = LCUser.getCurrentUser()
 
-        user?.let {
-            mDataBinding.toolbar.toolbarBaseTitle.text = "ta的资料"
-            mDataBinding.tvEmail.text = "邮箱：${it.email}"
-            mDataBinding.tvPhone.text = "电话：${it.mobilePhoneNumber}"
-            mDataBinding.tvInfo.text =
-                "${it.getString(LCUtils.LCUserSex)}    ${it.get(LCUtils.LCUserAge)}   |   学生   |   ${
-                    it.getString(
+        objId = intent.getStringExtra(OTHER_USER_ID).toString()
+        if (objId.isEmpty()) {
+            ToastUtils.toastShort("用户ID不能为空")
+            finish()
+            return
+        }
+        mDataBinding.toolbar.toolbarBaseTitle.text = "ta的资料"
+        queryOtherUserInfo()
+        tvLike.setOnClickListener {
+
+        }
+        tvDynamic.setOnClickListener {
+
+        }
+
+    }
+
+    private fun queryOtherUserInfo() {
+        val userObj = LCQuery<LCUser>("_User")
+        lifecycleScope.launch {
+            val user = withContext(Dispatchers.IO) {
+
+                userObj.get(objId)
+            }
+            val text =
+                "${user.getString(LCUtils.LCUserSex)}    ${user.get(LCUtils.LCUserAge)}   |   ${
+                    user.getString(
                         LCUtils.LCUserAddress
                     )
                 }"
-            mDataBinding.tvNum.text = it.username
-            mDataBinding.tvUserName.text = it.get(LCUtils.LCUserAlias).string()
-            val hobby = it.getString(LCUtils.LCUserHobby)
-            mDataBinding.tvHobby.append(hobby.replace(","," "))
-        }
-        mDataBinding.tvQuit.setOnClickListener {
-            startActivityAndFinish<LoginActivity>()
+            mDataBinding.tvUserInfo.text = text
+            mDataBinding.tvLikeCount.text = user.getString(LCUtils.LCUserLikeCount)
+            mDataBinding.tvUserName.text = user.getString(LCUtils.LCUserAlias)
         }
     }
 
+    companion object {
+        const val OTHER_USER_ID = "other_user_id"
+    }
 }

@@ -1,11 +1,11 @@
 package com.qyl.petmarket.ui.fragment
 
 import com.qyl.petmarket.R
-import com.qyl.petmarket.databinding.FragmentMainPetBinding
+import com.qyl.petmarket.databinding.FragmentMyPetBinding
 
-class MainPetFragment : BaseFragment<FragmentMainPetBinding>() {
+class MyPetFragment : BaseFragment<FragmentMyPetBinding>() {
 
-    override fun getLayoutId() = R.layout.fragment_main_pet
+    override fun getLayoutId() = R.layout.fragment_my_pet
 
     override fun initCreate() {
         super.initCreate()

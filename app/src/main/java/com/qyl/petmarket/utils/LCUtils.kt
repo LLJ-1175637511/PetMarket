@@ -12,7 +12,7 @@ object LCUtils {
     const val LCUserHobby = "hobby"
     const val LCUserDynamicCount = "dynamicCount"
 
-
+    const val ObjectId = "objectId"
 
 
 }

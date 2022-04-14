@@ -13,9 +13,9 @@
 
     <fragment
         android:id="@+id/navigation_main"
-        android:name="com.qyl.petmarket.ui.fragment.MainPetFragment"
+        android:name="com.qyl.petmarket.ui.fragment.MyPetFragment"
         android:label="@string/title_main"
-        tools:layout="@layout/fragment_main_pet" />
+        tools:layout="@layout/fragment_my_pet" />
 
     <fragment
         android:id="@+id/navigation_user"
