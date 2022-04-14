@@ -36,33 +36,6 @@ class LoginActivity : BaseLoginActivity<ActivityLoginBinding>() {
         }
     }
 
-    private fun <T : Activity> login(username: String, password: String, target: Class<T>) {
-        if (username.isEmpty()) {
-            ToastUtils.toastShort("用户名不能为空")
-            return
-        }
-        if (password.isEmpty()) {
-            ToastUtils.toastShort("密码不能为空")
-            return
-        }
-        startActivityAndFinish<MainActivity>()
-        /*lifecycleScope.launch {
-            fastRequest<LoginBean>(true) {
-                SystemRepository.loginRequest(
-                    SysNetConfig.buildLoginMap(
-                        username, password
-                    )
-                )
-            }?.let {
-                savedUserPwdSp(username, password,it.userNum)
-                val i = Intent(this@LoginActivity,MainActivity::class.java)
-                i.putExtra(userInfo,it)
-                startActivity(i)
-                finish()
-            }
-        }*/
-    }
-
     companion object{
         const val userInfo = "userInfo"
     }

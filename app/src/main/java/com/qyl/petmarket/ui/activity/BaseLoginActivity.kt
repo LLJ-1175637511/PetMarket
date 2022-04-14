@@ -1,13 +1,23 @@
 package com.qyl.petmarket.ui.activity
 
+import android.app.Activity
 import android.content.pm.PackageManager
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.databinding.ViewDataBinding
+import androidx.lifecycle.lifecycleScope
+import cn.leancloud.LCUser
 import com.qyl.petmarket.ext.save
 import com.qyl.petmarket.utils.Const
 import com.qyl.petmarket.utils.ECLib
+import com.qyl.petmarket.utils.LCUtils
 import com.qyl.petmarket.utils.ToastUtils
+import io.reactivex.Observer
+import io.reactivex.disposables.Disposable
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+
 
 abstract class BaseLoginActivity<DB : ViewDataBinding> : BaseActivity<DB>() {
 
@@ -62,6 +72,38 @@ abstract class BaseLoginActivity<DB : ViewDataBinding> : BaseActivity<DB>() {
 
     fun getUserInfo() = Pair(mUserName, mPassWord)
 
+    fun <T : Activity> login(username: String, password: String, target: Class<T>) {
+        if (username.isEmpty()) {
+            ToastUtils.toastShort("用户名不能为空")
+            return
+        }
+        if (password.isEmpty()) {
+            ToastUtils.toastShort("密码不能为空")
+            return
+        }
+        kotlin.runCatching {
+            lifecycleScope.launch {
+                LCUser.logIn(username, password).subscribe(object : Observer<LCUser> {
+                    override fun onSubscribe(disposable: Disposable) {}
+                    override fun onNext(user: LCUser) {
+                        // 登录成功
+                        savedSp(username, password, user.objectId)
+                        startActivityAndFinish(target)
+                    }
+
+                    override fun onError(throwable: Throwable) {
+                        // 登录失败（可能是密码错误）
+                        ToastUtils.toastShort("登录失败 ${throwable.message}")
+                    }
+
+                    override fun onComplete() {}
+                })
+            }
+        }.onFailure {
+            ToastUtils.toastShort("登录失败 ${it.message}")
+        }
+    }
+
     private fun loadUserData() {
         ECLib.getSP(Const.SPUser).let { sp ->
             if (sp.contains(Const.SPUserName)) {
@@ -76,11 +118,11 @@ abstract class BaseLoginActivity<DB : ViewDataBinding> : BaseActivity<DB>() {
     /**
      * 保存用户名 密码
      */
-    fun savedUserPwdSp(name: String, pwd: String,userId:String) {
+    private fun savedSp(name: String, pwd: String,id: String) {
         ECLib.getSP(Const.SPUser).save {
             putString(Const.SPUserName, name)
             putString(Const.SPUserPwd, pwd)
-            putString(Const.SPUserID, userId)
+            putString(LCUtils.SPUserObjectId, id)
         }
     }
 

@@ -31,3 +31,7 @@ inline fun <reified T> baseConverter(bb:BaseBean): T {
     return gson.fromJson(bb.data, type) as T
 }
 
+fun Any?.string(): String = this?.toString() ?: ""
+fun Any?.int(): Int = this?.toString()?.toInt() ?: 0
+fun Any?.long(): Long = this?.toString()?.toLong() ?: System.currentTimeMillis()
+fun Any?.boolean(): Boolean = this?.toString()?.toBoolean() ?: false

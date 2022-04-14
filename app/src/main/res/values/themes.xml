@@ -14,6 +14,11 @@
         <!-- Customize your theme here. -->
     </style>
 
+    <style name="rechargeET" parent="Theme.AppCompat.Light">
+        <item name="colorControlNormal">@android:color/darker_gray</item>
+        <item name="colorControlActivated">@android:color/holo_orange_dark</item>
+    </style>
+
     <style name="ToolbarPopupTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <item name="actionOverflowMenuStyle">@style/OverflowMenu</item>
     </style>

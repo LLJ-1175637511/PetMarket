@@ -1,6 +1,8 @@
 package com.qyl.petmarket.ui.fragment
 
+import android.app.Activity
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -41,5 +43,23 @@ abstract class BaseFragment<DB : ViewDataBinding> : Fragment() {
             requireActivity().currentFocus?.windowToken,
             InputMethodManager.HIDE_NOT_ALWAYS
         )
+    }
+
+    fun <T : Activity> startCommonActivity(activity: Class<T>) {
+        startActivity(Intent(requireContext(), activity))
+    }
+
+    inline fun <reified T : Activity> startCommonActivity() {
+        startCommonActivity(T::class.java)
+    }
+
+    fun <T : Activity> startActivityAndFinish(activity: Class<T>) {
+        startActivity(Intent(requireContext(), activity))
+        requireActivity().finish()
+    }
+
+    inline fun <reified T : Activity> startActivityAndFinish() {
+        startCommonActivity(T::class.java)
+        requireActivity().finish()
     }
 }

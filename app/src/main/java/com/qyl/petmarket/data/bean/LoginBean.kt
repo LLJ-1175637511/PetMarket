@@ -12,5 +12,7 @@ data class LoginBean(
     val permissions: Int,
     val telephone: String,
     val userName: String,
-    val userNum: String
+    val userNum: String,
+    val likeCount: Int,
+    val hobby: String,
 ): Parcelable
