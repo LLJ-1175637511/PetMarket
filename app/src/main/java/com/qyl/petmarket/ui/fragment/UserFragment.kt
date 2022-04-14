@@ -1,15 +1,11 @@
 package com.qyl.petmarket.ui.fragment
 
-import android.content.Intent
-import androidx.fragment.app.activityViewModels
 import cn.leancloud.LCUser
 import com.qyl.petmarket.R
-import com.qyl.petmarket.data.vm.MainVM
 import com.qyl.petmarket.databinding.FragmentUserBinding
 import com.qyl.petmarket.ext.string
-import com.qyl.petmarket.ui.activity.LoginActivity
-import com.qyl.petmarket.ui.activity.ReviseUserActivity
-import com.qyl.petmarket.ui.activity.UserActivity
+import com.qyl.petmarket.ui.activity.user.ReviseUserActivity
+import com.qyl.petmarket.ui.activity.user.UserActivity
 import com.qyl.petmarket.utils.LCUtils
 
 class UserFragment : BaseFragment<FragmentUserBinding>() {

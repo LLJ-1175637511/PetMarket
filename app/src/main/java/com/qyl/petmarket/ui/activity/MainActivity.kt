@@ -7,6 +7,7 @@ import com.qyl.petmarket.R
 import com.qyl.petmarket.data.bean.LoginBean
 import com.qyl.petmarket.data.vm.MainVM
 import com.qyl.petmarket.databinding.ActivityMainBinding
+import com.qyl.petmarket.ui.activity.user.LoginActivity
 
 class MainActivity : BaseActivity<ActivityMainBinding>() {
 

@@ -1,9 +1,10 @@
-package com.qyl.petmarket.ui.activity
+package com.qyl.petmarket.ui.activity.user
 
 import cn.leancloud.LCUser
 import com.qyl.petmarket.R
 import com.qyl.petmarket.databinding.ActivityUserBinding
 import com.qyl.petmarket.ext.string
+import com.qyl.petmarket.ui.activity.BaseActivity
 import com.qyl.petmarket.utils.LCUtils
 
 class UserActivity : BaseActivity<ActivityUserBinding>() {
@@ -15,7 +16,7 @@ class UserActivity : BaseActivity<ActivityUserBinding>() {
         val user = LCUser.getCurrentUser()
 
         user?.let {
-            mDataBinding.toolbar.toolbarBaseTitle.text = "个人资料"
+            mDataBinding.toolbar.toolbarBaseTitle.text = "我的资料"
             mDataBinding.tvEmail.text = "邮箱：${it.email}"
             mDataBinding.tvPhone.text = "电话：${it.mobilePhoneNumber}"
             mDataBinding.tvInfo.text =

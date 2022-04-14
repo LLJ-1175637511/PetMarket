@@ -1,9 +1,9 @@
-package com.qyl.petmarket.ui.activity
+package com.qyl.petmarket.ui.activity.user
 
 import android.Manifest
-import android.app.Activity
 import com.qyl.petmarket.R
 import com.qyl.petmarket.databinding.ActivityLoginBinding
+import com.qyl.petmarket.ui.activity.MainActivity
 import com.qyl.petmarket.utils.ToastUtils
 
 class LoginActivity : BaseLoginActivity<ActivityLoginBinding>() {

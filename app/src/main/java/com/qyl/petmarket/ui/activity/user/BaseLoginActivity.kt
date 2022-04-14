@@ -1,4 +1,4 @@
-package com.qyl.petmarket.ui.activity
+package com.qyl.petmarket.ui.activity.user
 
 import android.app.Activity
 import android.content.pm.PackageManager
@@ -8,15 +8,14 @@ import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.lifecycleScope
 import cn.leancloud.LCUser
 import com.qyl.petmarket.ext.save
+import com.qyl.petmarket.ui.activity.BaseActivity
 import com.qyl.petmarket.utils.Const
 import com.qyl.petmarket.utils.ECLib
 import com.qyl.petmarket.utils.LCUtils
 import com.qyl.petmarket.utils.ToastUtils
 import io.reactivex.Observer
 import io.reactivex.disposables.Disposable
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 
 abstract class BaseLoginActivity<DB : ViewDataBinding> : BaseActivity<DB>() {

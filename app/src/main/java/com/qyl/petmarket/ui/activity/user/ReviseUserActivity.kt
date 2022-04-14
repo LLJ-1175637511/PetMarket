@@ -1,23 +1,21 @@
-package com.qyl.petmarket.ui.activity
+package com.qyl.petmarket.ui.activity.user
 
-import androidx.lifecycle.lifecycleScope
+import cn.leancloud.LCObject
 import cn.leancloud.LCUser
 import com.qyl.petmarket.R
-import com.qyl.petmarket.databinding.ActivityRegisterBinding
+import com.qyl.petmarket.databinding.ActivityUserReviseBinding
 import com.qyl.petmarket.ext.save
-import com.qyl.petmarket.net.config.SysNetConfig
-import com.qyl.petmarket.net.repository.SystemRepository
+import com.qyl.petmarket.ui.activity.BaseActivity
 import com.qyl.petmarket.utils.Const
 import com.qyl.petmarket.utils.ECLib
 import com.qyl.petmarket.utils.LCUtils
 import com.qyl.petmarket.utils.ToastUtils
 import io.reactivex.Observer
 import io.reactivex.disposables.Disposable
-import kotlinx.coroutines.launch
 
-class RegisterActivity:BaseActivity<ActivityRegisterBinding>() {
+class ReviseUserActivity: BaseActivity<ActivityUserReviseBinding>() {
 
-    override fun getLayoutId() = R.layout.activity_register
+    override fun getLayoutId() = R.layout.activity_user_revise
 
     override fun init() {
         super.init()
@@ -25,7 +23,23 @@ class RegisterActivity:BaseActivity<ActivityRegisterBinding>() {
     }
 
     private fun initView() {
-        mDataBinding.toolbar.toolbarBaseTitle.text = "账号注册"
+        mDataBinding.toolbar.toolbarBaseTitle.text = "用户信息修改"
+        val user = LCUser.getCurrentUser()
+        mDataBinding.username.setText(user.getString(LCUtils.LCUserAlias))
+        mDataBinding.address.setText(user.getString(LCUtils.LCUserAddress))
+        mDataBinding.age.setText(user.getString(LCUtils.LCUserAge))
+        if (user.getString(LCUtils.LCUserSex) == "男"){
+            mDataBinding.radioGroup.check(R.id.rb1)
+        }else{
+            mDataBinding.radioGroup.check(R.id.rb2)
+        }
+        mDataBinding.userNumber.setText(user.username)
+        val usp = ECLib.getSP(Const.SPUser)
+        mDataBinding.password.setText(usp.getString(Const.SPUserPwd,""))
+        mDataBinding.confirmPassword.setText(usp.getString(Const.SPUserPwd,""))
+        mDataBinding.email.setText(user.email)
+        mDataBinding.phone.setText(user.mobilePhoneNumber)
+
         mDataBinding.tvRegister.setOnClickListener {
             kotlin.runCatching {
                 val username = mDataBinding.username.text.toString()
@@ -75,7 +89,7 @@ class RegisterActivity:BaseActivity<ActivityRegisterBinding>() {
         sex: String,
         age: String
     ) {
-        val user = LCUser()
+        val user = LCUser.getCurrentUser()
 
         user.username = userNumber
         user.password = password
@@ -87,15 +101,11 @@ class RegisterActivity:BaseActivity<ActivityRegisterBinding>() {
         user.put(LCUtils.LCUserAlias, username)
         user.put(LCUtils.LCUserSex, sex)
         user.put(LCUtils.LCUserAge, age)
-        user.put(LCUtils.LCUserLikeCount, "0")
-        user.put(LCUtils.LCUserHobby, "猫")
-        user.put(LCUtils.LCUserDynamicCount, "0")
 
-        user.signUpInBackground().subscribe(object : Observer<LCUser> {
+        user.saveInBackground().subscribe(object : Observer<LCObject> {
             override fun onSubscribe(disposable: Disposable) {}
-            override fun onNext(user: LCUser) {
-                // 注册成功
-                ToastUtils.toastShort("注册成功")
+            override fun onNext(user: LCObject) {
+                ToastUtils.toastShort("修改成功 请重新登录")
                 ECLib.getSP(Const.SPUser).save {
                     putString(Const.SPUserPwd, password)
                     putString(Const.SPUserName, userNumber)
@@ -105,7 +115,7 @@ class RegisterActivity:BaseActivity<ActivityRegisterBinding>() {
 
             override fun onError(throwable: Throwable) {
                 // 注册失败（通常是因为用户名已被使用）
-                ToastUtils.toastShort("注册失败 ${throwable.message}")
+                ToastUtils.toastShort("修改失败 ${throwable.message}")
             }
 
             override fun onComplete() {}
