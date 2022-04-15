@@ -28,9 +28,6 @@ class LoginActivity : BaseLoginActivity<ActivityLoginBinding>() {
                 val c = if (sp.contains(Const.SPHadChooseHobby)){
                     MainActivity::class.java
                 }else{
-//                    sp.save {
-//                        putString(Const.SPHadChooseHobby,"init")
-//                    }
                     ChooseHobbyActivity::class.java
                 }
                 login(
@@ -44,7 +41,7 @@ class LoginActivity : BaseLoginActivity<ActivityLoginBinding>() {
             }
         }
         mDataBinding.tvRegister.setOnClickListener {
-            startActivityAndFinish<RegisterActivity>()
+            startCommonActivity<RegisterActivity>()
         }
     }
 

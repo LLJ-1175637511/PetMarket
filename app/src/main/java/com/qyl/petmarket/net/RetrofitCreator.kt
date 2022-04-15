@@ -5,7 +5,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 object RetrofitCreator {
 
-    private const val mysqlUrl = "http://39.105.114.212:5298/"
+    private const val mysqlUrl = "http://47.110.231.180:5000/"
 
     private val retrofit by lazy {
         Retrofit.Builder()

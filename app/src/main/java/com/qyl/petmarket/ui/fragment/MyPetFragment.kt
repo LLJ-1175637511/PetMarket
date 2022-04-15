@@ -2,6 +2,7 @@ package com.qyl.petmarket.ui.fragment
 
 import com.qyl.petmarket.R
 import com.qyl.petmarket.databinding.FragmentMyPetBinding
+import com.qyl.petmarket.ui.activity.AddPetActivity
 
 class MyPetFragment : BaseFragment<FragmentMyPetBinding>() {
 
@@ -11,9 +12,20 @@ class MyPetFragment : BaseFragment<FragmentMyPetBinding>() {
         super.initCreate()
     }
 
+    override fun onResume() {
+        super.onResume()
+        getPetInfo()
+    }
+
+    private fun getPetInfo() {
+
+    }
+
     override fun initCreateView() {
         super.initCreateView()
-
+        mDataBinding.clAddPet.setOnClickListener {
+            startCommonActivity<AddPetActivity>()
+        }
     }
 
 }

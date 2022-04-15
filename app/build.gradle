@@ -56,10 +56,10 @@ dependencies {
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
 
-   /* //region glide
+    //region glide
     def glide_version = "4.12.0"
     implementation "com.github.bumptech.glide:glide:$glide_version"
-    //endregion*/
+    //endregion
 
     //dataBinding
     implementation 'androidx.fragment:fragment-ktx:1.2.5'
@@ -68,4 +68,9 @@ dependencies {
     implementation 'com.google.code.gson:gson:2.6.2'
     implementation 'cn.leancloud:storage-android:8.2.5'
     implementation 'io.reactivex.rxjava2:rxandroid:2.1.1'
+
+
+//图片压缩
+    implementation 'id.zelory:compressor:3.0.1'
+    implementation 'com.facebook.rebound:rebound:0.3.8'
 }

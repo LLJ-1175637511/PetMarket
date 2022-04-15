@@ -67,33 +67,7 @@ abstract class BaseActivity<DB : ViewDataBinding> : AppCompatActivity() {
         )
     }
 
-    suspend inline fun <reified T> fastRequest(
-        isLogin:Boolean = false,
-        crossinline block:suspend () -> BaseBean
-    ):T? = withContext(this.lifecycleScope.coroutineContext){
-        var data: T? = null
-        runCatching {
-            val baseBean = block()
-            LogUtils.d(NET_DATA_TAG, baseBean.toString())
-            if (baseBean.code.isCodeSuc()) {
-                data = baseConverter<T>(baseBean)
-                if (isLogin){
-                    ECLib.getSP(Const.SPNet).save {
-                        putString(Const.SPNetToken,baseBean.message)
-                    }
-                }
-            }else {
-                throw Exception("请求错误 --> errCode:${baseBean.code} errMsg:${baseBean.message}")
-            }
-        }.onFailure {
-            val exc = Exception(it)
-            LogUtils.d(NET_EXC_TAG, "网络错误:${exc.message}")
-            ToastUtils.toastShort(exc.message.toString())
-        }
-        data
-    }
-
-    private fun showDialog(df: DialogFragment, tag: String) {
+    fun showDialog(df: DialogFragment, tag: String) {
         val ft: FragmentTransaction = supportFragmentManager.beginTransaction()
         val prev: Fragment? = supportFragmentManager.findFragmentByTag(tag)
         if (prev != null) {

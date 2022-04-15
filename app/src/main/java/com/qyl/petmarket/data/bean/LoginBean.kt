@@ -5,14 +5,12 @@ import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 data class LoginBean(
-    val address: String,
+    val dynamicNum: Int,
     val eamil: String,
     val gender: String,
     val headPortrait: String,
-    val permissions: Int,
+    val likedNums: Int,
+    val preference: List<String>,
     val telephone: String,
-    val userName: String,
-    val userNum: String,
-    val likeCount: Int,
-    val hobby: String,
+    val userName: String
 ): Parcelable

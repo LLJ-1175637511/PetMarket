@@ -27,17 +27,6 @@
             android:textColor="@android:color/black" />
 
         <EditText
-            android:id="@+id/userNumber"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            style="@style/rechargeET"
-            android:hint="账号"
-            android:imeOptions="actionNext"
-            android:inputType="number"
-            android:textColor="@android:color/black" />
-
-        <EditText
             android:id="@+id/password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -81,27 +70,15 @@
             android:inputType="textEmailAddress"
             android:textColor="@android:color/black" />
 
-        <EditText
-            android:id="@+id/address"
+        <TextView
+            android:id="@+id/tvChoosePhoto"
+            android:padding="5dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            style="@style/rechargeET"
-            android:hint="地址"
-            android:imeOptions="actionGo"
-            android:inputType="text"
-            android:textColor="@android:color/black" />
-
-        <EditText
-            android:id="@+id/age"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            style="@style/rechargeET"
-            android:hint="年龄"
-            android:imeOptions="actionGo"
-            android:inputType="number"
-            android:textColor="@android:color/black" />
+            android:textColor="@color/qq_blue"
+            android:text="选择头像" />
 
         <RadioGroup
             android:id="@+id/radioGroup"
@@ -155,6 +132,8 @@
             android:textColor="@android:color/white"
             android:textSize="18sp"
             android:textStyle="bold" />
+
+
 
     </LinearLayout>
 </layout>

@@ -7,7 +7,11 @@ import androidx.core.content.ContextCompat
 import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.lifecycleScope
 import cn.leancloud.LCUser
+import com.qyl.petmarket.data.bean.LoginBean
 import com.qyl.petmarket.ext.save
+import com.qyl.petmarket.net.NetActivity
+import com.qyl.petmarket.net.config.SysNetConfig
+import com.qyl.petmarket.net.repository.SystemRepository
 import com.qyl.petmarket.ui.activity.BaseActivity
 import com.qyl.petmarket.utils.Const
 import com.qyl.petmarket.utils.ECLib
@@ -18,7 +22,7 @@ import io.reactivex.disposables.Disposable
 import kotlinx.coroutines.launch
 
 
-abstract class BaseLoginActivity<DB : ViewDataBinding> : BaseActivity<DB>() {
+abstract class BaseLoginActivity<DB : ViewDataBinding> : NetActivity<DB>() {
 
     override fun init() {
         super.init()
@@ -82,21 +86,16 @@ abstract class BaseLoginActivity<DB : ViewDataBinding> : BaseActivity<DB>() {
         }
         kotlin.runCatching {
             lifecycleScope.launch {
-                LCUser.logIn(username, password).subscribe(object : Observer<LCUser> {
-                    override fun onSubscribe(disposable: Disposable) {}
-                    override fun onNext(user: LCUser) {
-                        // 登录成功
-                        savedSp(username, password, user.objectId)
-                        startActivityAndFinish(target)
-                    }
-
-                    override fun onError(throwable: Throwable) {
-                        // 登录失败（可能是密码错误）
-                        ToastUtils.toastShort("登录失败 ${throwable.message}")
-                    }
-
-                    override fun onComplete() {}
-                })
+                fastRequest<LoginBean>() {
+                    SystemRepository.loginRequest(
+                        SysNetConfig.buildLoginMap(
+                            username, password
+                        )
+                    )
+                }?.let {
+                    savedSp(username, password)
+                    startActivityAndFinish(target)
+                }
             }
         }.onFailure {
             ToastUtils.toastShort("登录失败 ${it.message}")
@@ -117,11 +116,10 @@ abstract class BaseLoginActivity<DB : ViewDataBinding> : BaseActivity<DB>() {
     /**
      * 保存用户名 密码
      */
-    private fun savedSp(name: String, pwd: String,id: String) {
+    private fun savedSp(name: String, pwd: String) {
         ECLib.getSP(Const.SPUser).save {
             putString(Const.SPUserName, name)
             putString(Const.SPUserPwd, pwd)
-            putString(LCUtils.SPUserObjectId, id)
         }
     }
 

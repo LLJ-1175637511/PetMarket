@@ -1,14 +1,27 @@
 package com.qyl.petmarket.net.config
 
+import android.content.Context
+import android.graphics.Bitmap
+import android.net.Uri
+import com.qyl.petmarket.utils.PhotoUtils
+import id.zelory.compressor.Compressor
+import id.zelory.compressor.constraint.format
+import id.zelory.compressor.constraint.quality
+import id.zelory.compressor.constraint.size
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
+import java.io.File
+
 object SysNetConfig {
 
-    const val UserNum = "UserNum" //用户名
     const val UserPwd = "UserPwd" //用户密码
     const val UserName = "UserName"
     const val Gender = "Gender"
-    const val Address = "Address"
     const val Telephone = "Telephone"
     const val Eamil = "Eamil"
+//    const val Preference = "Preference"
+    const val HeadPortrait = "HeadPortrait"
 
     const val MULTIPART_TEXT = "text/plain"
     const val MULTIPART_FILE = "multipart/form-data"
@@ -16,24 +29,39 @@ object SysNetConfig {
     fun buildLoginMap(
         user: String,
         pass: String
-    ) = mapOf(UserNum to user, UserPwd to pass)
+    ) = mapOf(UserName to user, UserPwd to pass)
 
     fun buildRegisterMap(
         username: String,
-        userNumber: String,
         password: String,
         email: String,
         phone: String,
-        address: String,
         sex: String
     ) = mapOf(
         UserName to username,
-        UserNum to userNumber,
         UserPwd to password,
         Eamil to email,
         Telephone to phone,
-        Address to address,
         Gender to sex,
     )
+
+    suspend fun headPhoto(context: Context, uri: Uri,paramsName:String): MultipartBody.Part {
+        val path = PhotoUtils.getFileAbsolutePath(context, uri)
+        val faceFile = File(path)
+
+        if (!faceFile.exists()) throw Exception("图片缺失")
+
+        val compressedImageFile = Compressor.compress(context, faceFile) {
+            quality(50)
+            format(Bitmap.CompressFormat.JPEG)
+            size(512_152)
+        }
+
+        val fmt = MULTIPART_FILE.toMediaTypeOrNull()
+
+        val faceRequest = RequestBody.create(fmt, compressedImageFile)
+        //注意字段名
+        return MultipartBody.Part.createFormData(paramsName, compressedImageFile.name, faceRequest)
+    }
 
 }

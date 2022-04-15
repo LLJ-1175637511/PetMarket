@@ -7,8 +7,10 @@ import cn.leancloud.LCObject
 import cn.leancloud.LCUser
 import com.qyl.petmarket.R
 import com.qyl.petmarket.databinding.ActivityChooseHobbyBinding
+import com.qyl.petmarket.ext.save
 import com.qyl.petmarket.ui.activity.BaseActivity
 import com.qyl.petmarket.ui.activity.MainActivity
+import com.qyl.petmarket.utils.Const
 import com.qyl.petmarket.utils.ECLib
 import com.qyl.petmarket.utils.LCUtils
 import com.qyl.petmarket.utils.ToastUtils
@@ -54,6 +56,9 @@ class ChooseHobbyActivity : BaseActivity<ActivityChooseHobbyBinding>() {
             }
             tvToMain.setOnClickListener {
                 checkChoose{
+                    ECLib.getSP(Const.SPUser).save {
+                        putString(Const.SPHadChooseHobby, "init")
+                    }
                     startActivityAndFinish<MainActivity>()
                 }
             }
