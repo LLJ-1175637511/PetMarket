@@ -3,7 +3,10 @@ package com.qyl.petmarket.ui.activity.user
 import android.Manifest
 import com.qyl.petmarket.R
 import com.qyl.petmarket.databinding.ActivityLoginBinding
+import com.qyl.petmarket.ext.save
 import com.qyl.petmarket.ui.activity.MainActivity
+import com.qyl.petmarket.utils.Const
+import com.qyl.petmarket.utils.ECLib
 import com.qyl.petmarket.utils.ToastUtils
 
 class LoginActivity : BaseLoginActivity<ActivityLoginBinding>() {
@@ -21,10 +24,19 @@ class LoginActivity : BaseLoginActivity<ActivityLoginBinding>() {
             etUserNameLogin.setText(getUserInfo().first)
             etUserPwdLogin.setText(getUserInfo().second)
             btLogin.setOnClickListener {
+                val sp = ECLib.getSP(Const.SPUser)
+                val c = if (sp.contains(Const.SPHadChooseHobby)){
+                    MainActivity::class.java
+                }else{
+//                    sp.save {
+//                        putString(Const.SPHadChooseHobby,"init")
+//                    }
+                    ChooseHobbyActivity::class.java
+                }
                 login(
                     etUserNameLogin.text.toString(),
                     etUserPwdLogin.text.toString(),
-                    MainActivity::class.java
+                    c
                 )
             }
             ivLoginWeibo.setOnClickListener {

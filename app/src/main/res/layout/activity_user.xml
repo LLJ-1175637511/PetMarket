@@ -157,6 +157,19 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"/>
 
+        <TextView
+            android:id="@+id/tvChangeHobby"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="32dp"
+            android:text="更改喜好"
+            android:padding="10dp"
+            android:textColor="#E8473C"
+            android:textSize="14sp"
+            android:layout_marginStart="30dp"
+            app:layout_constraintBottom_toBottomOf="@+id/tvHobby"
+            app:layout_constraintStart_toEndOf="@+id/tvHobby"
+            app:layout_constraintTop_toTopOf="@+id/tvHobby" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/dialogBack"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="5dp"
+            android:background="@drawable/shape_rect_white"
+            android:paddingTop="20dp"
+            tools:context=".ui.activity.user.ChooseHobbyActivity">
+
+
+            <TextView
+                android:id="@+id/textView4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:layout_marginBottom="30dp"
+                android:text="选择你喜爱的宠物类型"
+                android:textColor="@color/grey_dark"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toTopOf="@+id/constraintLayout"
+                app:layout_constraintStart_toStartOf="parent" />
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constraintLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="30dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent">
+
+
+                <androidx.constraintlayout.utils.widget.ImageFilterView
+                    android:id="@+id/cat"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    app:layout_constraintEnd_toStartOf="@+id/dog"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:roundPercent="1"
+                    app:srcCompat="@mipmap/cat" />
+
+                <ImageView
+                    android:id="@+id/cbCat"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/hobby_true"
+                    app:layout_constraintBottom_toBottomOf="@+id/cat"
+                    app:layout_constraintEnd_toEndOf="@+id/cat" />
+
+                <androidx.constraintlayout.utils.widget.ImageFilterView
+                    android:id="@+id/dog"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/cat"
+                    app:layout_constraintEnd_toStartOf="@+id/birds"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/cat"
+                    app:roundPercent="1"
+                    app:srcCompat="@mipmap/dog" />
+
+                <ImageView
+                    android:id="@+id/cbDog"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/hobby_true"
+                    app:layout_constraintBottom_toBottomOf="@+id/dog"
+                    app:layout_constraintEnd_toEndOf="@+id/dog" />
+
+                <androidx.constraintlayout.utils.widget.ImageFilterView
+                    android:id="@+id/birds"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:scaleType="centerCrop"
+                    app:layout_constraintBottom_toBottomOf="@+id/dog"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/dog"
+                    app:roundPercent="1"
+                    app:srcCompat="@mipmap/birds" />
+
+                <ImageView
+                    android:id="@+id/cbBirds"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/hobby_true"
+                    app:layout_constraintBottom_toBottomOf="@+id/birds"
+                    app:layout_constraintEnd_toEndOf="@+id/birds" />
+
+
+                <androidx.constraintlayout.utils.widget.ImageFilterView
+                    android:id="@+id/fish"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_marginTop="30dp"
+                    android:scaleType="centerCrop"
+                    app:layout_constraintStart_toStartOf="@+id/cat"
+                    app:layout_constraintTop_toBottomOf="@+id/cat"
+                    app:roundPercent="1"
+                    app:srcCompat="@mipmap/fish" />
+
+                <ImageView
+                    android:id="@+id/cbfish"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/hobby_true"
+                    app:layout_constraintBottom_toBottomOf="@+id/fish"
+                    app:layout_constraintEnd_toEndOf="@+id/fish" />
+
+
+                <androidx.constraintlayout.utils.widget.ImageFilterView
+                    android:id="@+id/pig"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_marginTop="28dp"
+                    app:layout_constraintStart_toStartOf="@+id/dog"
+                    app:layout_constraintTop_toBottomOf="@+id/cat"
+                    app:roundPercent="1"
+                    app:srcCompat="@mipmap/pig" />
+
+                <ImageView
+                    android:id="@+id/cbpig"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/hobby_true"
+                    app:layout_constraintBottom_toBottomOf="@+id/pig"
+                    app:layout_constraintEnd_toEndOf="@+id/pig" />
+
+                <androidx.constraintlayout.utils.widget.ImageFilterView
+                    android:id="@+id/mouse"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_marginTop="30dp"
+                    android:scaleType="centerCrop"
+                    app:layout_constraintStart_toStartOf="@+id/birds"
+                    app:layout_constraintTop_toBottomOf="@+id/cat"
+                    app:roundPercent="1"
+                    app:srcCompat="@mipmap/mouse" />
+
+                <ImageView
+                    android:id="@+id/cbmouse"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/hobby_true"
+                    app:layout_constraintBottom_toBottomOf="@+id/mouse"
+                    app:layout_constraintEnd_toEndOf="@+id/mouse" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <TextView
+            android:id="@+id/tvSureChoose"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:gravity="center"
+            android:visibility="gone"
+            android:text="确认选择 "
+            android:textColor="#3396E3"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tvToMain"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_marginTop="30dp"
+            android:layout_marginEnd="20dp"
+            android:visibility="gone"
+            android:layout_marginBottom="15dp"
+            android:drawableEnd="@drawable/ic_baseline_arrow_forward_ios_24"
+            android:gravity="center"
+            android:text="进入主页 "
+            android:textColor="#3396E3"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+</layout>

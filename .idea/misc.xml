@@ -14,15 +14,12 @@
         <entry key="..\:/E/Android/Graduation2022/EpidemicControl/app/src/main/res/layout/fragment_user.xml" value="0.22327898550724637" />
         <entry key="..\:/E/Android/Graduation2022/EpidemicControl/app/src/main/res/layout/toolbar.xml" value="0.22327898550724637" />
         <entry key="..\:/E/Android/Graduation2022/EpidemicControl/app/src/main/res/menu/bottom_nav_menu.xml" value="0.25" />
-        <entry key="..\:/E/Android/Graduation2022/PetMarket/app/src/main/res/layout/activity_my_user.xml" value="0.22826086956521738" />
-        <entry key="..\:/E/Android/Graduation2022/PetMarket/app/src/main/res/layout/activity_other_user.xml" value="0.22826086956521738" />
-        <entry key="..\:/E/Android/Graduation2022/PetMarket/app/src/main/res/layout/activity_user.xml" value="0.22826086956521738" />
-        <entry key="..\:/E/Android/Graduation2022/PetMarket/app/src/main/res/layout/fragment_main_pet.xml" value="0.14356884057971014" />
         <entry key="app/src/main/res/drawable-v24/shape_rect_white.xml" value="0.148" />
         <entry key="app/src/main/res/drawable-v24/shape_round_blue_low.xml" value="0.148" />
+        <entry key="app/src/main/res/layout/activity_choose_hobby.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.15896739130434784" />
         <entry key="app/src/main/res/layout/activity_register.xml" value="0.15896739130434784" />
-        <entry key="app/src/main/res/layout/activity_user.xml" value="0.14583333333333334" />
+        <entry key="app/src/main/res/layout/activity_user.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_user_revise.xml" value="0.15896739130434784" />
         <entry key="app/src/main/res/layout/fragment_main_pet.xml" value="0.14583333333333334" />
         <entry key="app/src/main/res/layout/fragment_user.xml" value="0.25" />
