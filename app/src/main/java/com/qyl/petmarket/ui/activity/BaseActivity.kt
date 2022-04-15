@@ -10,6 +10,9 @@ import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
+import androidx.fragment.app.DialogFragment
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.lifecycleScope
 import com.qyl.petmarket.ext.*
 import com.qyl.petmarket.net.BaseBean
@@ -88,6 +91,16 @@ abstract class BaseActivity<DB : ViewDataBinding> : AppCompatActivity() {
             ToastUtils.toastShort(exc.message.toString())
         }
         data
+    }
+
+    private fun showDialog(df: DialogFragment, tag: String) {
+        val ft: FragmentTransaction = supportFragmentManager.beginTransaction()
+        val prev: Fragment? = supportFragmentManager.findFragmentByTag(tag)
+        if (prev != null) {
+            ft.remove(prev)
+        }
+        ft.addToBackStack(null)
+        df.show(ft, tag)
     }
 
     override fun onDestroy() {

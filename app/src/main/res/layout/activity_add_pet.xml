@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <include android:id="@+id/toolbar" layout="@layout/toolbar"/>
+
+        <androidx.constraintlayout.utils.widget.ImageFilterView
+            android:id="@+id/ivPetIPhoto"
+            android:layout_width="160dp"
+            android:layout_height="240dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="30dp"
+            android:src="@mipmap/dog"
+            android:background="@color/dialogBack"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar"
+            tools:srcCompat="@tools:sample/avatars" />
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/linearLayoutCompat"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="30dp"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="@id/ivPetIPhoto"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/ivPetIPhoto"
+            app:layout_constraintTop_toTopOf="@id/ivPetIPhoto">
+
+            <EditText
+                android:id="@+id/name"
+                style="@style/rechargeET"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="名称"
+                android:textColorHint="@color/grey_dark"
+                android:imeOptions="actionNext"
+                android:inputType="text"
+                android:minWidth="100dp"
+                android:textColor="@android:color/black" />
+
+            <TextView
+                android:id="@+id/birthday"
+                style="@style/rechargeET"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:minWidth="100dp"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
+                android:text="设置生日"
+                android:textColor="@color/qq_blue" />
+
+            <EditText
+                android:id="@+id/disgusting"
+                style="@style/rechargeET"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginTop="15dp"
+                android:layout_weight="1"
+                android:background="@drawable/shape_rect_themes"
+                android:gravity="top"
+                android:hint="禁忌"
+                android:textColorHint="@color/grey_dark"
+                android:imeOptions="actionNext"
+                android:inputType="text"
+                android:minWidth="100dp"
+                android:padding="10dp"
+                android:textColor="@android:color/black" />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <TextView
+            android:id="@+id/text1"
+            style="@style/rechargeET"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="喜好"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="30dp"
+            android:textColor="@color/grey_dark"
+            app:layout_constraintStart_toStartOf="@+id/ivPetIPhoto"
+            app:layout_constraintTop_toBottomOf="@+id/ivPetIPhoto" />
+
+        <EditText
+            android:id="@+id/like"
+            style="@style/rechargeET"
+            android:layout_width="0dp"
+            android:layout_height="120dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/shape_rect_themes"
+            android:gravity="top"
+            android:imeOptions="actionNext"
+            android:inputType="text"
+            android:padding="10dp"
+            android:textColor="@android:color/black"
+            app:layout_constraintEnd_toEndOf="@+id/linearLayoutCompat"
+            app:layout_constraintStart_toStartOf="@+id/ivPetIPhoto"
+            app:layout_constraintTop_toBottomOf="@+id/text1" />
+
+        <Button
+            android:id="@+id/btAddPey"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/shape_rect_blue_low"
+            android:gravity="center"
+            android:text="添  加"
+            android:layout_marginBottom="50dp"
+            android:layout_marginStart="60dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="60dp"
+            android:textColor="@android:color/white"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>
