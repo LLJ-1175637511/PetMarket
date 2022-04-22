@@ -40,6 +40,7 @@ class MyPetFragment : NetFragment<FragmentMyPetBinding>() {
 
     override fun initCreateView() {
         super.initCreateView()
+        mDataBinding.toolbar.toolbarBaseTitle.text = "我的宠物"
         mDataBinding.recyclerView.adapter = adapter
         mDataBinding.clAddPet.setOnClickListener {
             launch.launch(Intent(requireContext(),AddPetActivity::class.java))

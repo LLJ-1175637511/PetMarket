@@ -7,14 +7,18 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <include layout="@layout/toolbar" android:id="@+id/toolbar"/>
+
         <androidx.recyclerview.widget.RecyclerView
             android:padding="5dp"
             android:id="@+id/recyclerView"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"/>
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_marginTop="10dp"
             android:id="@+id/clAddPet"
             android:layout_width="match_parent"
             android:background="@drawable/shape_rect_white"
