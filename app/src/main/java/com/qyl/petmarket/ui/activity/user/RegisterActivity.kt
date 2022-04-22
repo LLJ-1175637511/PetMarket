@@ -3,18 +3,13 @@ package com.qyl.petmarket.ui.activity.user
 import android.net.Uri
 import android.os.Build
 import androidx.lifecycle.lifecycleScope
-import cn.leancloud.LCUser
 import com.qyl.petmarket.R
 import com.qyl.petmarket.databinding.ActivityRegisterBinding
-import com.qyl.petmarket.ext.isCodeSuc
 import com.qyl.petmarket.ext.save
 import com.qyl.petmarket.net.config.SysNetConfig
 import com.qyl.petmarket.net.repository.SystemRepository
-import com.qyl.petmarket.ui.activity.BaseActivity
 import com.qyl.petmarket.ui.activity.BaseAddPhotoActivity
 import com.qyl.petmarket.utils.*
-import io.reactivex.Observer
-import io.reactivex.disposables.Disposable
 import kotlinx.coroutines.launch
 
 class RegisterActivity : BaseAddPhotoActivity<ActivityRegisterBinding>() {
@@ -28,16 +23,16 @@ class RegisterActivity : BaseAddPhotoActivity<ActivityRegisterBinding>() {
 
     private fun initView() {
         mDataBinding.toolbar.toolbarBaseTitle.text = "账号注册"
-        mDataBinding.tvChoosePhoto.setOnClickListener { v ->
-            buildLaunch {
-                uri?.let {
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                        mDataBinding.tvChoosePhoto.setTextColor(getColor(R.color.grey))
-                    }
-                    mDataBinding.tvChoosePhoto.text = "头像选择成功"
+        buildLaunch {
+            uri?.let {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    mDataBinding.tvChoosePhoto.setTextColor(getColor(R.color.grey))
                 }
+                mDataBinding.tvChoosePhoto.text = "头像选择成功"
             }
-            choosePhoto(launchPhoto)
+        }
+        mDataBinding.tvChoosePhoto.setOnClickListener { v ->
+            choosePhoto()
         }
         mDataBinding.tvRegister.setOnClickListener {
             kotlin.runCatching {
@@ -66,9 +61,9 @@ class RegisterActivity : BaseAddPhotoActivity<ActivityRegisterBinding>() {
                 lifecycleScope.launch {
                     val map = SysNetConfig.buildRegisterMap(username, password, email, phone, sex)
                     fastRequest<Boolean> {
-                        val photo = SysNetConfig.headPhoto(
+                        val photo = SysNetConfig.buildPhotoPart(
                             this@RegisterActivity,
-                            uri ?: Uri.Builder().build(),
+                            uri ?: Uri.EMPTY,
                             SysNetConfig.HeadPortrait
                         )
                         SystemRepository.registerRequest(map,photo)

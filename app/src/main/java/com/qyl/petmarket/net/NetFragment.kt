@@ -3,10 +3,13 @@ package com.qyl.petmarket.net
 import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.lifecycleScope
 import com.qyl.petmarket.data.bean.LoginBean
-import com.qyl.petmarket.ext.*
+import com.qyl.petmarket.ext.NET_DATA_TAG
+import com.qyl.petmarket.ext.NET_EXC_TAG
+import com.qyl.petmarket.ext.baseConverter
+import com.qyl.petmarket.ext.isCodeSuc
 import com.qyl.petmarket.net.config.SysNetConfig
 import com.qyl.petmarket.net.repository.SystemRepository
-import com.qyl.petmarket.ui.activity.BaseActivity
+import com.qyl.petmarket.ui.fragment.BaseFragment
 import com.qyl.petmarket.utils.Const
 import com.qyl.petmarket.utils.ECLib
 import com.qyl.petmarket.utils.LogUtils
@@ -14,7 +17,7 @@ import com.qyl.petmarket.utils.ToastUtils
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-abstract class NetActivity<DB : ViewDataBinding> : BaseActivity<DB>() {
+abstract class NetFragment<DB : ViewDataBinding>:BaseFragment<DB>(){
 
     suspend inline fun <reified T> fastRequest(
         crossinline block: suspend () -> BaseBean
@@ -53,4 +56,5 @@ abstract class NetActivity<DB : ViewDataBinding> : BaseActivity<DB>() {
             }
         }
     }
+
 }

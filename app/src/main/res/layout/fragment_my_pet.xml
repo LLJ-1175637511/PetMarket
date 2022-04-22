@@ -29,6 +29,7 @@
                 android:layout_height="wrap_content"
                 android:drawableStart="@mipmap/add_pet"
                 android:text="添加宠物"
+                android:textStyle="bold"
                 android:drawablePadding="15dp"
                 android:textSize="18sp"
                 android:gravity="center"

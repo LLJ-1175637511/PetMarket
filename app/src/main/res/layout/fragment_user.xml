@@ -26,7 +26,6 @@
                 android:layout_width="60dp"
                 android:layout_height="60dp"
                 app:roundPercent="1"
-                android:src="@mipmap/head_icon"
                 android:layout_marginStart="20dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -38,7 +37,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="5dp"
-                android:text="龍龍"
+                android:text="龍"
                 android:textColor="@color/black"
                 android:textSize="18sp"
                 android:textStyle="bold"
@@ -52,7 +51,7 @@
                 android:layout_marginEnd="20dp"
                 android:drawableTop="@mipmap/pet"
                 android:gravity="center"
-                android:text="5天"
+                android:text="1天"
                 app:layout_constraintBottom_toBottomOf="@+id/ivHead"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/ivHead" />
@@ -65,7 +64,7 @@
                 android:paddingTop="2dp"
                 android:paddingEnd="8dp"
                 android:paddingBottom="2dp"
-                android:text="辽宁省锦州市古塔区"
+                android:text="辽宁省锦州市"
                 android:textColor="@color/grey"
                 android:textSize="12sp"
                 app:layout_constraintBottom_toBottomOf="@+id/ivHead"
@@ -112,26 +111,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tvLike" />
-
-        <TextView
-            android:id="@+id/tvReviseUserInfo"
-            android:layout_width="0dp"
-            android:layout_height="60dp"
-            android:layout_marginStart="5dp"
-            android:layout_marginEnd="5dp"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/shape_rect_white"
-            android:drawableEnd="@drawable/ic_baseline_keyboard_arrow_right_24"
-            android:drawablePadding="12dp"
-            android:gravity="center_vertical"
-            android:paddingStart="15dp"
-            android:text="修改个人信息"
-            android:textColor="@color/grey_dark"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tvDynamic" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

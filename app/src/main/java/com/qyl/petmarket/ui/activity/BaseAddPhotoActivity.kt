@@ -45,7 +45,7 @@ abstract class BaseAddPhotoActivity<DB : ViewDataBinding> : NetActivity<DB>() {
         requestPermission()
     }
 
-    fun choosePhoto(launchPhoto: ActivityResultLauncher<Intent>) {
+    fun choosePhoto() {
         val galleryIntent = Intent(Intent.ACTION_GET_CONTENT)
         galleryIntent.addCategory(Intent.CATEGORY_OPENABLE)
         galleryIntent.type = "image/*"

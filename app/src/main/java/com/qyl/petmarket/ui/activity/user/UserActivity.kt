@@ -1,50 +1,64 @@
 package com.qyl.petmarket.ui.activity.user
 
+import android.app.Activity
 import android.content.Intent
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.lifecycle.lifecycleScope
 import cn.leancloud.LCUser
+import com.bumptech.glide.Glide
 import com.qyl.petmarket.R
+import com.qyl.petmarket.data.bean.LoginBean
 import com.qyl.petmarket.databinding.ActivityUserBinding
 import com.qyl.petmarket.ext.string
+import com.qyl.petmarket.net.NetActivity
+import com.qyl.petmarket.net.config.SysNetConfig
+import com.qyl.petmarket.net.repository.SystemRepository
 import com.qyl.petmarket.ui.activity.BaseActivity
 import com.qyl.petmarket.utils.Const
 import com.qyl.petmarket.utils.LCUtils
+import kotlinx.coroutines.launch
 
-class UserActivity : BaseActivity<ActivityUserBinding>() {
+class UserActivity : NetActivity<ActivityUserBinding>() {
 
     override fun getLayoutId() = R.layout.activity_user
 
-    override fun onResume() {
-        super.onResume()
-        val user = LCUser.getCurrentUser()
-
-        user?.let {
-            mDataBinding.toolbar.toolbarBaseTitle.text = "我的资料"
-            mDataBinding.tvEmail.text = "邮箱：${it.email}"
-            mDataBinding.tvPhone.text = "电话：${it.mobilePhoneNumber}"
-            mDataBinding.tvInfo.text =
-                "${it.getString(LCUtils.LCUserSex)}    ${it.get(LCUtils.LCUserAge)}   |   学生   |   ${
-                    it.getString(
-                        LCUtils.LCUserAddress
-                    )
-                }"
-            mDataBinding.tvNum.text = it.username
-            mDataBinding.tvUserName.text = it.get(LCUtils.LCUserAlias).string()
-            val hobby = it.getString(LCUtils.LCUserHobby)
-            mDataBinding.tvHobby.append(hobby.replace(","," "))
-            mDataBinding.tvHobby.text = "喜好：${it.getString(LCUtils.LCUserHobby).replace('_',' ')}"
+    private val launch =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { ar ->
+            if (ar.resultCode != Activity.RESULT_OK) return@registerForActivityResult
+            ar.data?.getStringExtra(ChooseHobbyActivity.TAG_NEW_PREFERENCE)?.let {
+                mDataBinding.tvHobby.text = "喜好：$it"
+            }
         }
-    }
 
     override fun init() {
         super.init()
         mDataBinding.tvChangeHobby.setOnClickListener {
-            startActivity(Intent(this,ChooseHobbyActivity::class.java)
-                .putExtra(ChooseHobbyActivity.TAG_IS_CHANGE,"isChange")
+            launch.launch(
+                Intent(this, ChooseHobbyActivity::class.java)
+                    .putExtra(ChooseHobbyActivity.TAG_IS_CHANGE, "isChange")
             )
         }
         mDataBinding.tvQuit.setOnClickListener {
             startActivityAndFinish<LoginActivity>()
         }
+        getUserData {
+            initUserData(it)
+        }
+    }
+
+    private fun initUserData(data: LoginBean) {
+        mDataBinding.toolbar.toolbarBaseTitle.text = "我的资料"
+        mDataBinding.tvEmail.text = "邮箱：${data.eamil}"
+        mDataBinding.tvPhone.text = "电话：${data.telephone}"
+        mDataBinding.tvInfo.text = "${data.gender}    |   学生"
+        mDataBinding.tvUserName.text = data.userName
+        var hobby = ""
+        data.preference.forEach {
+            hobby += "$it "
+        }
+        mDataBinding.tvHobby.text = "喜好：$hobby"
+        val url = "http://47.110.231.180:8080${data.headPortrait}"
+        Glide.with(this).load(url).into(mDataBinding.ivHead)
     }
 
 }

@@ -18,8 +18,12 @@ import com.bumptech.glide.Glide
 import com.qyl.petmarket.R
 import com.qyl.petmarket.databinding.ActivityAddPetBinding
 import com.qyl.petmarket.databinding.DialogChooseDateBinding
+import com.qyl.petmarket.net.NetActivity
+import com.qyl.petmarket.net.config.SysNetConfig
+import com.qyl.petmarket.net.repository.SystemRepository
 import com.qyl.petmarket.utils.PhotoUtils
 import com.qyl.petmarket.utils.ToastUtils
+import com.qyl.petmarket.utils.addZero
 import id.zelory.compressor.Compressor
 import id.zelory.compressor.constraint.format
 import id.zelory.compressor.constraint.quality
@@ -31,32 +35,12 @@ import kotlinx.coroutines.withContext
 import java.io.File
 
 
-class AddPetActivity : BaseActivity<ActivityAddPetBinding>() {
+class AddPetActivity : BaseAddPhotoActivity<ActivityAddPetBinding>() {
 
     override fun getLayoutId() = R.layout.activity_add_pet
 
-    var uri: Uri? = null
-
-    @SuppressLint("CheckResult")
-    private val launchPhoto =
-        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { ar ->
-            if (ar.resultCode != Activity.RESULT_OK) return@registerForActivityResult
-            uri = ar.data?.data ?: return@registerForActivityResult
-            Glide.with(this).load(uri).into(mDataBinding.ivPetIPhoto)
-        }
-
-    private val launchPhotoPermission =
-        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { ar ->
-            if (!(Build.VERSION.SDK_INT >= Build.VERSION_CODES.R && Environment.isExternalStorageManager())) {
-                ToastUtils.toastShort("存储权限获取失败")
-                finish()
-                return@registerForActivityResult
-            }
-        }
-
     override fun init() {
         super.init()
-        requestPermission()
         mDataBinding.toolbar.toolbarBaseTitle.text = "添加宠物"
         mDataBinding.birthday.text = INIT_BIRTHDAY
         mDataBinding.birthday.setOnClickListener {
@@ -67,6 +51,9 @@ class AddPetActivity : BaseActivity<ActivityAddPetBinding>() {
         }
         mDataBinding.btAddPey.setOnClickListener {
             addPet()
+        }
+        buildLaunch {
+            Glide.with(this).load(uri).into(mDataBinding.ivPetIPhoto)
         }
     }
 
@@ -83,52 +70,31 @@ class AddPetActivity : BaseActivity<ActivityAddPetBinding>() {
             ToastUtils.toastShort("未选择图片")
             return
         }
-        lifecycleScope.launch {
-
-        }
+        reportPhoto()
     }
 
     private fun reportPhoto() {
-        kotlin.runCatching {
-
-        }.onFailure {
-            ToastUtils.toastShort("文件上传失败：${it.message}")
-        }
         lifecycleScope.launch {
-            val file = withContext(Dispatchers.IO) {
-                val path = PhotoUtils.getFileAbsolutePath(this@AddPetActivity, uri)
-                val compressedImageFile = Compressor.compress(this@AddPetActivity, File(path)) {
-                    quality(50)
-                    format(Bitmap.CompressFormat.JPEG)
-                    size(512_152) // 512kb
-                }
-                LCFile("${mDataBinding.name.text}.jpg", compressedImageFile.readBytes())
+            val map = SysNetConfig.buildAddPetMap(
+                mDataBinding.name.text.toString(),
+                mDataBinding.birthday.text.toString(),
+                mDataBinding.like.text.toString(),
+                mDataBinding.disgusting.text.toString(),
+            )
+            val photo = withContext(Dispatchers.IO) {
+                SysNetConfig.buildPhotoPart(
+                    this@AddPetActivity,
+                    uri ?: Uri.EMPTY,
+                    SysNetConfig.PetPicture
+                )
             }
-            file.saveInBackground(object : ProgressCallback() {
-                override fun done(percent: Int) {
-
-                }
-            })
-            ToastUtils.toastShort("上传成功")
-            delay(1000)
-            finish()
-        }
-    }
-
-    private fun choosePhoto() {
-        val galleryIntent = Intent(Intent.ACTION_GET_CONTENT)
-        galleryIntent.addCategory(Intent.CATEGORY_OPENABLE)
-        galleryIntent.type = "image/*"
-        this.launchPhoto.launch(galleryIntent)
-    }
-
-    private fun requestPermission() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) { //Android11（SDK版本30）
-            // 先判断有没有权限
-            if (!Environment.isExternalStorageManager()) { //判断是否获取到“允许管理所有文件”权限
-                val intent = Intent(Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION)
-                intent.data = Uri.parse("package:" + getPackageName())
-                launchPhotoPermission.launch(intent)
+            fastRequest<Boolean> {
+                SystemRepository.addPetRequest(map,photo)
+            }?.let {
+                ToastUtils.toastShort("添加成功")
+                setResult(RESULT_OK)
+                delay(1000)
+                finish()
             }
         }
     }
@@ -141,13 +107,13 @@ class AddPetActivity : BaseActivity<ActivityAddPetBinding>() {
         dialog.setCancelable(false)
         binding.btSure.setOnClickListener {
             mDataBinding.birthday.text =
-                "${binding.datePicker.year}年${binding.datePicker.month}月${binding.datePicker.dayOfMonth}日"
+                "${binding.datePicker.year}-${(binding.datePicker.month).addZero()}-${(binding.datePicker.dayOfMonth).addZero()}"
             dialog.cancel()
         }
         dialog.show()
     }
 
     companion object {
-        private const val INIT_BIRTHDAY = "birthday"
+        private const val INIT_BIRTHDAY = "设置生日"
     }
 }

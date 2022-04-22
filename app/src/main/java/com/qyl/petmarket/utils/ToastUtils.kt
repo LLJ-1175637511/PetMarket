@@ -12,3 +12,5 @@ object ToastUtils {
         Toast.makeText(ECLib.getC(),msg,Toast.LENGTH_LONG).show()
     }
 }
+
+fun Int.addZero(): String = if (this < 10) "0$this" else this.toString()

@@ -84,21 +84,9 @@ abstract class BaseLoginActivity<DB : ViewDataBinding> : NetActivity<DB>() {
             ToastUtils.toastShort("密码不能为空")
             return
         }
-        kotlin.runCatching {
-            lifecycleScope.launch {
-                fastRequest<LoginBean>() {
-                    SystemRepository.loginRequest(
-                        SysNetConfig.buildLoginMap(
-                            username, password
-                        )
-                    )
-                }?.let {
-                    savedSp(username, password)
-                    startActivityAndFinish(target)
-                }
-            }
-        }.onFailure {
-            ToastUtils.toastShort("登录失败 ${it.message}")
+        getUserData(username, password) {
+            savedSp(username, password)
+            startActivityAndFinish(target)
         }
     }
 

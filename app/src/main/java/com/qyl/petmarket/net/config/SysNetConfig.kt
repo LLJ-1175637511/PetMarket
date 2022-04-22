@@ -3,6 +3,8 @@ package com.qyl.petmarket.net.config
 import android.content.Context
 import android.graphics.Bitmap
 import android.net.Uri
+import com.qyl.petmarket.utils.Const
+import com.qyl.petmarket.utils.ECLib
 import com.qyl.petmarket.utils.PhotoUtils
 import id.zelory.compressor.Compressor
 import id.zelory.compressor.constraint.format
@@ -17,14 +19,23 @@ object SysNetConfig {
 
     const val UserPwd = "UserPwd" //用户密码
     const val UserName = "UserName"
+    const val Preference = "Preference"
     const val Gender = "Gender"
     const val Telephone = "Telephone"
     const val Eamil = "Eamil"
-//    const val Preference = "Preference"
+
+    const val PetName = "PetName"
+    const val Birthday = "Birthday"
+    const val Like = "Like"
+    const val Taboo = "Taboo"
+
     const val HeadPortrait = "HeadPortrait"
+    const val PetPicture = "PetPicture"
 
     const val MULTIPART_TEXT = "text/plain"
     const val MULTIPART_FILE = "multipart/form-data"
+
+    fun getUserName() = ECLib.getSP(Const.SPUser).getString(Const.SPUserName, "").toString()
 
     fun buildLoginMap(
         user: String,
@@ -45,7 +56,20 @@ object SysNetConfig {
         Gender to sex,
     )
 
-    suspend fun headPhoto(context: Context, uri: Uri,paramsName:String): MultipartBody.Part {
+    fun buildAddPetMap(
+        petName: String,
+        birthday: String,
+        like: String,
+        taboo: String,
+    ) = mapOf(
+        UserName to getUserName(),
+        PetName to petName,
+        Birthday to birthday,
+        Like to like,
+        Taboo to taboo,
+    )
+
+    suspend fun buildPhotoPart(context: Context, uri: Uri, paramsName:String): MultipartBody.Part {
         val path = PhotoUtils.getFileAbsolutePath(context, uri)
         val faceFile = File(path)
 

@@ -1,6 +1,9 @@
 package com.qyl.petmarket.ui.activity.user
 
+import android.app.Activity
+import android.content.Intent
 import android.view.View
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
 import cn.leancloud.LCObject
@@ -8,18 +11,17 @@ import cn.leancloud.LCUser
 import com.qyl.petmarket.R
 import com.qyl.petmarket.databinding.ActivityChooseHobbyBinding
 import com.qyl.petmarket.ext.save
+import com.qyl.petmarket.net.NetActivity
+import com.qyl.petmarket.net.repository.SystemRepository
 import com.qyl.petmarket.ui.activity.BaseActivity
 import com.qyl.petmarket.ui.activity.MainActivity
-import com.qyl.petmarket.utils.Const
-import com.qyl.petmarket.utils.ECLib
-import com.qyl.petmarket.utils.LCUtils
-import com.qyl.petmarket.utils.ToastUtils
+import com.qyl.petmarket.utils.*
 import io.reactivex.Observer
 import io.reactivex.disposables.Disposable
 import kotlinx.coroutines.launch
 import java.lang.StringBuilder
 
-class ChooseHobbyActivity : BaseActivity<ActivityChooseHobbyBinding>() {
+class ChooseHobbyActivity : NetActivity<ActivityChooseHobbyBinding>() {
 
     override fun getLayoutId() = R.layout.activity_choose_hobby
 
@@ -64,6 +66,7 @@ class ChooseHobbyActivity : BaseActivity<ActivityChooseHobbyBinding>() {
             }
             tvSureChoose.setOnClickListener {
                 checkChoose{
+                    setResult(RESULT_OK,Intent().putExtra(TAG_NEW_PREFERENCE,it))
                     finish()
                 }
             }
@@ -76,42 +79,28 @@ class ChooseHobbyActivity : BaseActivity<ActivityChooseHobbyBinding>() {
         }
     }
 
-    private fun checkChoose(block:()->Unit) {
+    private fun checkChoose(block:(t:String)->Unit) {
         kotlin.runCatching {
             lifecycleScope.launch {
                 val sb = StringBuilder()
-                if (mDataBinding.cbBirds.isVisible) sb.append("鸟_")
-                if (mDataBinding.cbfish.isVisible) sb.append("鱼_")
-                if (mDataBinding.cbCat.isVisible) sb.append("猫_")
-                if (mDataBinding.cbDog.isVisible) sb.append("狗_")
-                if (mDataBinding.cbmouse.isVisible) sb.append("鼠_")
-                if (mDataBinding.cbpig.isVisible) sb.append("猪_")
+                if (mDataBinding.cbBirds.isVisible) sb.append("鸟 ")
+                if (mDataBinding.cbfish.isVisible) sb.append("鱼 ")
+                if (mDataBinding.cbCat.isVisible) sb.append("猫 ")
+                if (mDataBinding.cbDog.isVisible) sb.append("狗 ")
+                if (mDataBinding.cbmouse.isVisible) sb.append("鼠 ")
+                if (mDataBinding.cbpig.isVisible) sb.append("猪 ")
                 var str = sb.toString()
-                if (str.last() == '_') str = str.substring(str.indices)
-                val user = LCUser.getCurrentUser()
-                user.put(LCUtils.LCUserHobby, str)
-                user.saveInBackground().subscribe(object : Observer<LCObject>{
-                    override fun onNext(t: LCObject) {
-                        block()
-                    }
-
-                    override fun onError(e: Throwable) {
-                        ToastUtils.toastShort("选择失败：${e.message}")
-                    }
-
-                    override fun onSubscribe(d: Disposable) {
-
-                    }
-
-                    override fun onComplete() {
-                    }
-
-                })
+                if (str.last() == ' ') str = str.substring(str.indices)
+                fastRequest<Boolean> {
+                    SystemRepository.preferenceRequest(str)
+                }?.let {
+                    block(str)
+                }
             }
         }
     }
-
     companion object{
         const val TAG_IS_CHANGE = "tag_is_change"
+        const val TAG_NEW_PREFERENCE = "tag_new_preference"
     }
 }
