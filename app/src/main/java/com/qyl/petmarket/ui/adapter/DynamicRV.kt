@@ -14,7 +14,7 @@ import com.qyl.petmarket.databinding.ItemPetBinding
 import com.qyl.petmarket.ui.activity.UpdatePetActivity
 import com.qyl.petmarket.utils.convertGeLinTime
 
-class PetRV(private val vm: PetVM) : RecyclerView.Adapter<PetRV.Holder>() {
+class DynamicRV(private val vm: PetVM) : RecyclerView.Adapter<DynamicRV.Holder>() {
 
     private val list = mutableListOf<PetBean>()
 
@@ -40,7 +40,7 @@ class PetRV(private val vm: PetVM) : RecyclerView.Adapter<PetRV.Holder>() {
 
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int):Holder {
         val binding = DataBindingUtil.inflate<ItemPetBinding>(
             LayoutInflater.from(parent.context),
             R.layout.item_pet,

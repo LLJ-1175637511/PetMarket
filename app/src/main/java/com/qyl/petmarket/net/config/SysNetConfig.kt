@@ -28,9 +28,16 @@ object SysNetConfig {
     const val Birthday = "Birthday"
     const val Like = "Like"
     const val Taboo = "Taboo"
+    const val ID = "Id"
+
+    const val DynamicKind = "DynamicKind"
+    const val PetKind = "PetKind"
+    const val Author = "Author"
+    const val DynamicContent = "DynamicContent"
 
     const val HeadPortrait = "HeadPortrait"
     const val PetPicture = "PetPicture"
+    const val DynamicPicture = "DynamicPicture"
 
     const val MULTIPART_TEXT = "text/plain"
     const val MULTIPART_FILE = "multipart/form-data"
@@ -68,8 +75,41 @@ object SysNetConfig {
         Like to like,
         Taboo to taboo,
     )
+    fun buildAddDynamicMap(
+        dynamicKind: String,
+        petKind: String?,
+        dynamicContent: String?,
+    ):Map<String,String> {
+        val map = mutableMapOf<String,String>()
+        map.apply {
+            petKind?.let {
+                put(PetKind, it)
+            }
+            dynamicContent?.let {
+                put(DynamicContent, it)
+            }
+            put(DynamicKind, dynamicKind)
+            put(Author, getUserName())
+        }
+        return map
+    }
 
-    suspend fun buildPhotoPart(context: Context, uri: Uri, paramsName:String): MultipartBody.Part {
+    fun buildUpdatePetMap(
+        id:Int,
+        petName: String,
+        birthday: String,
+        like: String,
+        taboo: String,
+    ) = mapOf(
+        UserName to getUserName(),
+        ID to id.toString(),
+        PetName to petName,
+        Birthday to birthday,
+        Like to like,
+        Taboo to taboo,
+    )
+
+    suspend fun buildPhotoPart(context: Context, uri: Uri, paramsName: String): MultipartBody.Part {
         val path = PhotoUtils.getFileAbsolutePath(context, uri)
         val faceFile = File(path)
 

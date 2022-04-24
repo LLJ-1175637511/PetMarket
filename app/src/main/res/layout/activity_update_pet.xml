@@ -110,7 +110,7 @@
             android:layout_height="wrap_content"
             android:background="@drawable/shape_rect_blue_low"
             android:gravity="center"
-            android:text="添  加"
+            android:text="更  新"
             android:layout_marginBottom="50dp"
             android:layout_marginStart="60dp"
             android:layout_marginTop="20dp"

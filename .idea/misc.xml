@@ -14,6 +14,7 @@
         <entry key="..\:/E/Android/Graduation2022/EpidemicControl/app/src/main/res/layout/fragment_user.xml" value="0.22327898550724637" />
         <entry key="..\:/E/Android/Graduation2022/EpidemicControl/app/src/main/res/layout/toolbar.xml" value="0.22327898550724637" />
         <entry key="..\:/E/Android/Graduation2022/EpidemicControl/app/src/main/res/menu/bottom_nav_menu.xml" value="0.25" />
+        <entry key="app/src/main/res/drawable-v24/shape_rect_blue_line.xml" value="0.159" />
         <entry key="app/src/main/res/drawable-v24/shape_rect_blue_low.xml" value="0.148" />
         <entry key="app/src/main/res/drawable-v24/shape_rect_white.xml" value="0.148" />
         <entry key="app/src/main/res/drawable-v24/shape_round_blue_low.xml" value="0.148" />
@@ -21,17 +22,25 @@
         <entry key="app/src/main/res/drawable/shape_round_red.xml" value="0.156" />
         <entry key="app/src/main/res/layout/activity_add_pet.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_choose_hobby.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/activity_dynamic_add.xml" value="0.18478260869565216" />
+        <entry key="app/src/main/res/layout/activity_dynamic_search.xml" value="0.18478260869565216" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.15896739130434784" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.15070921985815602" />
+        <entry key="app/src/main/res/layout/activity_other_user.xml" value="0.18478260869565216" />
         <entry key="app/src/main/res/layout/activity_register.xml" value="0.15896739130434784" />
         <entry key="app/src/main/res/layout/activity_test.xml" value="0.15896739130434784" />
+        <entry key="app/src/main/res/layout/activity_update_pet.xml" value="0.18478260869565216" />
         <entry key="app/src/main/res/layout/activity_user.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_user_revise.xml" value="0.15896739130434784" />
         <entry key="app/src/main/res/layout/dialog_choose_date.xml" value="0.15070921985815602" />
         <entry key="app/src/main/res/layout/fragment_main_pet.xml" value="0.14583333333333334" />
         <entry key="app/src/main/res/layout/fragment_my_pet.xml" value="0.15070921985815602" />
+        <entry key="app/src/main/res/layout/fragment_pet.xml" value="0.18478260869565216" />
+        <entry key="app/src/main/res/layout/fragment_square.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_user.xml" value="0.25" />
         <entry key="app/src/main/res/layout/item_pet.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/tab_text.xml" value="0.18478260869565216" />
+        <entry key="app/src/main/res/layout/toolbar.xml" value="0.18478260869565216" />
         <entry key="app/src/main/res/menu/bottom_nav_menu.xml" value="0.2953125" />
       </map>
     </option>
