@@ -29,6 +29,7 @@ object SysNetConfig {
     const val Like = "Like"
     const val Taboo = "Taboo"
     const val ID = "Id"
+    const val Context = "Context"
 
     const val DynamicKind = "DynamicKind"
     const val PetKind = "PetKind"
@@ -97,6 +98,7 @@ object SysNetConfig {
     fun buildQueryDynamicMap(
         author: String?,
         dynamicKind: String?,
+        searchContent: String?,
     ):Map<String,String> {
         val map = mutableMapOf<String,String>()
         map.apply {
@@ -105,6 +107,9 @@ object SysNetConfig {
             }
             dynamicKind?.let {
                 put(DynamicKind, it)
+            }
+            searchContent?.let {
+                put(Context, it)
             }
             put(UserName, getUserName())
         }

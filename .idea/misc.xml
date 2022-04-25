@@ -32,6 +32,7 @@
         <entry key="app/src/main/res/layout/activity_update_pet.xml" value="0.18478260869565216" />
         <entry key="app/src/main/res/layout/activity_user.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_user_revise.xml" value="0.15896739130434784" />
+        <entry key="app/src/main/res/layout/custom_big_photo.xml" value="0.18478260869565216" />
         <entry key="app/src/main/res/layout/dialog_choose_date.xml" value="0.15070921985815602" />
         <entry key="app/src/main/res/layout/fragment_main_pet.xml" value="0.14583333333333334" />
         <entry key="app/src/main/res/layout/fragment_my_pet.xml" value="0.15070921985815602" />
@@ -39,6 +40,7 @@
         <entry key="app/src/main/res/layout/fragment_pet_dynamic.xml" value="0.15070921985815602" />
         <entry key="app/src/main/res/layout/fragment_square.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_user.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/item_dynamic_search.xml" value="0.25" />
         <entry key="app/src/main/res/layout/item_dynamic_square.xml" value="0.2991197668987772" />
         <entry key="app/src/main/res/layout/item_pet.xml" value="0.25" />
         <entry key="app/src/main/res/layout/tab_text.xml" value="0.18478260869565216" />

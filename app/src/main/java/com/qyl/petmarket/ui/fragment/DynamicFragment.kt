@@ -31,6 +31,11 @@ class DynamicFragment(private val dynamicType: DynamicType) :
         vm.queryData(dynamicType)
     }
 
+    override fun onPause() {
+        super.onPause()
+        vm.bigUrl.postValue(null)
+    }
+
     override fun initCreateView() {
         super.initCreateView()
         adapter = DynamicRV(vm)

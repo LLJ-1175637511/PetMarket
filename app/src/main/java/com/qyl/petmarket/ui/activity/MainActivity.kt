@@ -1,17 +1,11 @@
 package com.qyl.petmarket.ui.activity
 
-import android.view.View
 import androidx.activity.viewModels
-import androidx.fragment.app.activityViewModels
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
-import com.bumptech.glide.Glide
 import com.qyl.petmarket.R
-import com.qyl.petmarket.data.bean.LoginBean
 import com.qyl.petmarket.data.vm.DynamicSquareVM
-import com.qyl.petmarket.data.vm.MainVM
 import com.qyl.petmarket.databinding.ActivityMainBinding
-import com.qyl.petmarket.ui.activity.user.LoginActivity
 
 class MainActivity : BaseActivity<ActivityMainBinding>() {
 
@@ -27,15 +21,11 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
 
     private fun initPhotoBG() {
         vm.bigUrl.observe(this){
-            if (it == null){
-                mDataBinding.flBG.visibility = View.GONE
-            }else{
-                mDataBinding.flBG.visibility = View.VISIBLE
-                Glide.with(this).load(it).into(mDataBinding.ivBigPhoto)
+            if (it == null) {
+                mDataBinding.flBG.hide()
+                return@observe
             }
-        }
-        mDataBinding.flBG.setOnClickListener {
-            vm.bigUrl.postValue(null)
+            mDataBinding.flBG.loadBigPhoto(it)
         }
     }
 
