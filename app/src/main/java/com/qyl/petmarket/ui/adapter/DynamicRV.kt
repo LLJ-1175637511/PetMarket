@@ -3,47 +3,57 @@ package com.qyl.petmarket.ui.adapter
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.qyl.petmarket.R
+import com.qyl.petmarket.data.bean.DynamicBean
 import com.qyl.petmarket.data.bean.PetBean
+import com.qyl.petmarket.data.vm.DynamicSquareVM
 import com.qyl.petmarket.data.vm.PetVM
+import com.qyl.petmarket.databinding.ItemDynamicSquareBinding
 import com.qyl.petmarket.databinding.ItemPetBinding
 import com.qyl.petmarket.ui.activity.UpdatePetActivity
+import com.qyl.petmarket.utils.convertGeLinAllTime
 import com.qyl.petmarket.utils.convertGeLinTime
 
-class DynamicRV(private val vm: PetVM) : RecyclerView.Adapter<DynamicRV.Holder>() {
+class DynamicRV(private val vm: DynamicSquareVM) : RecyclerView.Adapter<DynamicRV.Holder>() {
 
-    private val list = mutableListOf<PetBean>()
+    private val list = mutableListOf<DynamicBean>()
 
-    inner class Holder(val binding: ItemPetBinding) : RecyclerView.ViewHolder(binding.root) {
+    inner class Holder(val binding: ItemDynamicSquareBinding) : RecyclerView.ViewHolder(binding.root) {
 
-        fun bindData(item: PetBean){
-            binding.ivPhoto
-            val url = "http://47.110.231.180:8080${item.petPicture}"
-            Glide.with(binding.root.context).load(url).into(binding.ivPhoto)
-            binding.tvLike.text = item.like
-            binding.tvTaboo.text = item.taboo
-            binding.tvBirthday.text = item.birthday.convertGeLinTime()
-            binding.tvName.text = item.petName
-            binding.tvDelete.setOnClickListener {
-                vm.deletePet(item.id)
+        fun bindData(item: DynamicBean){
+            val photoHead = "http://47.110.231.180:8080"
+            Glide.with(binding.root.context).load("${photoHead}${item.headPortrait}").into(binding.ivHead)
+            binding.tvName.text = item.author
+            binding.tvTime.text = item.publishTime.replace('T',' ')
+            binding.tvLikeCount.text = item.likedNums.toString()
+            item.dynamicContent?.let {
+                binding.tvContent.visibility = View.VISIBLE
+                binding.tvContent.text = it
             }
-            binding.tvRevise.setOnClickListener {
-                it.context.startActivity(Intent(it.context,UpdatePetActivity::class.java).apply {
-                    putExtra(UpdatePetActivity.TAG_UPDATE,item)
-                })
+            item.dynamicPicture?.let {
+                val u = "${photoHead}${it}"
+                binding.ivPhoto.visibility = View.VISIBLE
+                Glide.with(binding.root.context).load(u).into(binding.ivPhoto)
+                binding.ivPhoto.setOnClickListener {
+                    vm.bigUrl.postValue(u)
+                }
+            }
+            binding.ivLike.setOnClickListener {
+
             }
         }
 
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int):Holder {
-        val binding = DataBindingUtil.inflate<ItemPetBinding>(
+        val binding = DataBindingUtil.inflate<ItemDynamicSquareBinding>(
             LayoutInflater.from(parent.context),
-            R.layout.item_pet,
+            R.layout.item_dynamic_square,
             parent,
             false
         )
@@ -55,7 +65,7 @@ class DynamicRV(private val vm: PetVM) : RecyclerView.Adapter<DynamicRV.Holder>(
     }
 
     @SuppressLint("NotifyDataSetChanged")
-    fun update(data:List<PetBean>){
+    fun update(data:List<DynamicBean>){
         list.clear()
         list.addAll(data)
         notifyDataSetChanged()

@@ -33,6 +33,9 @@ object SystemNetWork {
     suspend fun addDynamic(map: Map<String, String>) =
         dynamicServer.addDynamic(map).await()
 
+ suspend fun findDynamic(map: Map<String, String>) =
+        dynamicServer.findDynamic(map).await()
+
     suspend fun findPet(username: String = SysNetConfig.getUserName()) =
         petServer.findPet(username).await()
 

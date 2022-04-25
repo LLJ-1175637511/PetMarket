@@ -7,7 +7,6 @@ import retrofit2.http.*
 
 interface DynamicServer {
 
-
     @Multipart
     @POST("Dynamic/AddDynamicInfo")
     fun addDynamic(
@@ -15,9 +14,13 @@ interface DynamicServer {
         @Part photo: MultipartBody.Part
     ): Call<BaseBean>
 
-    @Multipart
     @POST("Dynamic/AddDynamicInfo")
     fun addDynamic(
+        @QueryMap map: Map<String, String>
+    ): Call<BaseBean>
+
+    @GET("Dynamic/GetDynamic")
+    fun findDynamic(
         @QueryMap map: Map<String, String>
     ): Call<BaseBean>
 

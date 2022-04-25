@@ -60,7 +60,6 @@ class AddDynamicActivity : BaseAddPhotoActivity<ActivityDynamicAddBinding>() {
         }
         lifecycleScope.launch {
             val map = SysNetConfig.buildAddDynamicMap(type, pteKind, content)
-
             fastRequest<Boolean> {
                 if (uri == null) {
                     SystemRepository.addDynamicRequest(map)
@@ -69,7 +68,7 @@ class AddDynamicActivity : BaseAddPhotoActivity<ActivityDynamicAddBinding>() {
                         SysNetConfig.buildPhotoPart(
                             this@AddDynamicActivity,
                             uri ?: Uri.EMPTY,
-                            SysNetConfig.PetPicture
+                            SysNetConfig.DynamicPicture
                         )
                     }
                     SystemRepository.addDynamicRequest(map, photo)

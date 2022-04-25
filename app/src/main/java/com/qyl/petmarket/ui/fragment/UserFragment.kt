@@ -24,7 +24,7 @@ class UserFragment : NetFragment<FragmentUserBinding>() {
     }
 
     private fun initUserData(data: LoginBean) {
-        mDataBinding.toolbar.toolbarBaseTitle.text = "我的资料"
+        mDataBinding.toolbar.toolbarBaseTitle.text = "我   的"
         mDataBinding.tvLike.text = "点赞记录：（${data.likedNums}）"
         mDataBinding.tvDynamic.text = "我的动态：（${data.dynamicNum}）"
         mDataBinding.tvUserName.text = data.userName

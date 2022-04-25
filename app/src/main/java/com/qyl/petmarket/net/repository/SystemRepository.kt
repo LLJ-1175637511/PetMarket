@@ -13,14 +13,16 @@ object SystemRepository {
 
     suspend fun addPetRequest(map: Map<String, String>,photo: MultipartBody.Part) = SystemNetWork.addPet(map,photo)
 
-    suspend fun addDynamicRequest(map: Map<String, String>,photo: MultipartBody.Part) = SystemNetWork.addDynamic(map,photo)
-    suspend fun addDynamicRequest(map: Map<String, String>) = SystemNetWork.addDynamic(map)
-
     suspend fun findPetRequest() = SystemNetWork.findPet()
 
     suspend fun deletePetRequest(id:Int) = SystemNetWork.deletePet(id)
 
     suspend fun updatePetRequest(map: Map<String, String>,photo: MultipartBody.Part) = SystemNetWork.updatePet(map,photo)
     suspend fun updatePetRequest(map: Map<String, String>) = SystemNetWork.updatePet(map)
+
+    suspend fun addDynamicRequest(map: Map<String, String>,photo: MultipartBody.Part) = SystemNetWork.addDynamic(map,photo)
+    suspend fun addDynamicRequest(map: Map<String, String>) = SystemNetWork.addDynamic(map)
+
+    suspend fun findDynamicRequest(map: Map<String, String>) = SystemNetWork.findDynamic(map)
 
 }

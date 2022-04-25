@@ -43,6 +43,7 @@ fun Long.convertTime(timeEnum: TimeEnum): String {
  */
 @SuppressLint("SimpleDateFormat")
 fun String.convertGeLinTime(): String = this.substring(0..9)
+fun String.convertGeLinAllTime(): String = this.substring(10..(this.lastIndex))
 
 fun String.convertLongTime(timeEnum: TimeEnum): Long {
     val type = when (timeEnum) {

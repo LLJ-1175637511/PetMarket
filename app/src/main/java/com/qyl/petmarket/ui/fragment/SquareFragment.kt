@@ -2,19 +2,25 @@ package com.qyl.petmarket.ui.fragment
 
 import android.annotation.SuppressLint
 import android.os.Build
+import android.view.View
 import android.widget.TextView
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.viewpager2.adapter.FragmentStateAdapter
+import com.bumptech.glide.Glide
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import com.qyl.petmarket.R
-import com.qyl.petmarket.data.vm.DynamicVM
+import com.qyl.petmarket.data.vm.DynamicSquareVM
 import com.qyl.petmarket.databinding.FragmentSquareBinding
 import com.qyl.petmarket.ui.activity.AddDynamicActivity
 import com.qyl.petmarket.ui.activity.SearchDynamicActivity
+import com.qyl.petmarket.utils.LogUtils
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 class SquareFragment : BaseFragment<FragmentSquareBinding>() {
 
@@ -22,12 +28,7 @@ class SquareFragment : BaseFragment<FragmentSquareBinding>() {
 
     private val tabList = arrayOf("日常", "科普", "好物")
 
-    private val vm by activityViewModels<DynamicVM>()
-
-    override fun initCreate() {
-        super.initCreate()
-
-    }
+    private val vm by activityViewModels<DynamicSquareVM>()
 
     override fun initCreateView() {
         super.initCreateView()
@@ -40,16 +41,24 @@ class SquareFragment : BaseFragment<FragmentSquareBinding>() {
         }
     }
 
+    override fun onPause() {
+        super.onPause()
+        vm.bigUrl.postValue(null)
+    }
+
     inner class PageAdapter(fa: FragmentActivity) : FragmentStateAdapter(fa) {
         override fun getItemCount() = tabList.size
 
         override fun createFragment(position: Int): Fragment {
-            return when (position) {
-                0 -> PetDynamicFragment(PetDynamicFragment.DynamicType.日常)
-                1 -> PetDynamicFragment(PetDynamicFragment.DynamicType.科普)
-                else -> PetDynamicFragment(PetDynamicFragment.DynamicType.好物)
+            val t =  when (position) {
+                0 -> DynamicFragment.DynamicType.日常
+                1 -> DynamicFragment.DynamicType.科普
+                else -> DynamicFragment.DynamicType.好物
             }
+            return DynamicFragment(t)
         }
+
+
     }
 
     @SuppressLint("NewApi")

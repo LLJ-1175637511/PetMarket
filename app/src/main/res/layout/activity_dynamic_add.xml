@@ -14,12 +14,12 @@
         <ImageView
             android:id="@+id/ivBack"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="16dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_baseline_arrow_back_ios_new_32" />
+            app:srcCompat="@drawable/ic_baseline_arrow_back_ios_new_24" />
 
         <TextView
             android:id="@+id/tvAddDynamic"
@@ -133,12 +133,15 @@
 
         <TextView
             android:id="@+id/tvSetPetKind"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="设置类别"
             android:layout_marginTop="50dp"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:text="设置类别"
             android:textColor="@color/colorPrimary"
             android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="@+id/view3"
             app:layout_constraintStart_toStartOf="@id/etContent"
             app:layout_constraintTop_toBottomOf="@+id/radioGroup" />
 

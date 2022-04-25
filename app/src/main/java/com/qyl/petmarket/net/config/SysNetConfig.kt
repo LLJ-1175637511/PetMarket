@@ -94,6 +94,23 @@ object SysNetConfig {
         return map
     }
 
+    fun buildQueryDynamicMap(
+        author: String?,
+        dynamicKind: String?,
+    ):Map<String,String> {
+        val map = mutableMapOf<String,String>()
+        map.apply {
+            author?.let {
+                put(Author, it)
+            }
+            dynamicKind?.let {
+                put(DynamicKind, it)
+            }
+            put(UserName, getUserName())
+        }
+        return map
+    }
+
     fun buildUpdatePetMap(
         id:Int,
         petName: String,
