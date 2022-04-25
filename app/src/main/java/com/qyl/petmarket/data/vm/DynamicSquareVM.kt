@@ -12,7 +12,6 @@ class DynamicSquareVM : NetVM() {
 
     val freshState = MutableLiveData<Boolean>()
 
-    val bigUrl = MutableLiveData<String>()
 
     val normalList = MutableLiveData<List<DynamicBean>>()
     val scienceList = MutableLiveData<List<DynamicBean>>()
@@ -24,7 +23,7 @@ class DynamicSquareVM : NetVM() {
         viewModelScope.launch {
             fastRequest<List<DynamicBean>> {
                 SystemRepository.findDynamicRequest(
-                    SysNetConfig.buildQueryDynamicMap(null, type.name,null)
+                    SysNetConfig.buildQueryDynamicMap(null, type.name, null)
                 )
             }?.let {
                 when (type) {
@@ -37,14 +36,26 @@ class DynamicSquareVM : NetVM() {
         }
     }
 
-    fun querySearchData(content:String) {
+    fun querySearchData(content: String) {
         viewModelScope.launch {
             fastRequest<List<DynamicBean>> {
                 SystemRepository.findDynamicRequest(
-                    SysNetConfig.buildQueryDynamicMap(null, null,content)
+                    SysNetConfig.buildQueryDynamicMap(null, null, content)
                 )
             }?.let {
                 searchList.postValue(it)
+            }
+        }
+    }
+
+    fun likeDynamic(id: Int, block: () -> Unit) {
+        viewModelScope.launch {
+            fastRequest<Boolean> {
+                SystemRepository.likeDynamicRequest(
+                    SysNetConfig.buildLikeDynamic(id)
+                )
+            }?.let {
+                block()
             }
         }
     }

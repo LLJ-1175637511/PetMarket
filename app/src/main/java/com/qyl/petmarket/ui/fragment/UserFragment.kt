@@ -18,6 +18,9 @@ class UserFragment : NetFragment<FragmentUserBinding>() {
         mDataBinding.clUserInfo.setOnClickListener {
             startCommonActivity<UserActivity>()
         }
+        mDataBinding.tvDynamic.setOnClickListener {
+            startCommonActivity<UserActivity>()
+        }
         getUserData {
             initUserData(it)
         }

@@ -29,7 +29,7 @@ object SysNetConfig {
     const val Like = "Like"
     const val Taboo = "Taboo"
     const val ID = "Id"
-    const val Context = "Context"
+    const val Content = "Content"
 
     const val DynamicKind = "DynamicKind"
     const val PetKind = "PetKind"
@@ -39,6 +39,7 @@ object SysNetConfig {
     const val HeadPortrait = "HeadPortrait"
     const val PetPicture = "PetPicture"
     const val DynamicPicture = "DynamicPicture"
+    const val DynamicId = "DynamicId"
 
     const val MULTIPART_TEXT = "text/plain"
     const val MULTIPART_FILE = "multipart/form-data"
@@ -76,12 +77,13 @@ object SysNetConfig {
         Like to like,
         Taboo to taboo,
     )
+
     fun buildAddDynamicMap(
         dynamicKind: String,
         petKind: String?,
         dynamicContent: String?,
-    ):Map<String,String> {
-        val map = mutableMapOf<String,String>()
+    ): Map<String, String> {
+        val map = mutableMapOf<String, String>()
         map.apply {
             petKind?.let {
                 put(PetKind, it)
@@ -95,12 +97,17 @@ object SysNetConfig {
         return map
     }
 
+    fun buildLikeDynamic(id: Int) = mapOf(
+        UserName to getUserName(),
+        DynamicId to id.toString()
+    )
+
     fun buildQueryDynamicMap(
         author: String?,
         dynamicKind: String?,
         searchContent: String?,
-    ):Map<String,String> {
-        val map = mutableMapOf<String,String>()
+    ): Map<String, String> {
+        val map = mutableMapOf<String, String>()
         map.apply {
             author?.let {
                 put(Author, it)
@@ -109,7 +116,7 @@ object SysNetConfig {
                 put(DynamicKind, it)
             }
             searchContent?.let {
-                put(Context, it)
+                put(Content, it)
             }
             put(UserName, getUserName())
         }
@@ -117,7 +124,7 @@ object SysNetConfig {
     }
 
     fun buildUpdatePetMap(
-        id:Int,
+        id: Int,
         petName: String,
         birthday: String,
         like: String,

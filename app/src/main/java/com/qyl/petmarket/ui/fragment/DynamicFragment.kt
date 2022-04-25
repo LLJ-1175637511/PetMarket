@@ -7,6 +7,7 @@ import com.bumptech.glide.Glide
 import com.qyl.petmarket.R
 import com.qyl.petmarket.data.bean.DynamicBean
 import com.qyl.petmarket.data.bean.LoginBean
+import com.qyl.petmarket.data.vm.BigPhotoVm
 import com.qyl.petmarket.data.vm.DynamicSquareVM
 import com.qyl.petmarket.databinding.FragmentPetDynamicBinding
 import com.qyl.petmarket.databinding.FragmentUserBinding
@@ -17,12 +18,12 @@ import com.qyl.petmarket.utils.LogUtils
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
-class DynamicFragment(private val dynamicType: DynamicType) :
+class DynamicFragment(private val dynamicType: DynamicType,val block: (bigPhoto: String) -> Unit) :
     NetFragment<FragmentPetDynamicBinding>() {
 
     override fun getLayoutId() = R.layout.fragment_pet_dynamic
 
-    private val vm by activityViewModels<DynamicSquareVM>()
+    private val vm by viewModels<DynamicSquareVM>()
 
     private lateinit var adapter: DynamicRV
 
@@ -31,14 +32,11 @@ class DynamicFragment(private val dynamicType: DynamicType) :
         vm.queryData(dynamicType)
     }
 
-    override fun onPause() {
-        super.onPause()
-        vm.bigUrl.postValue(null)
-    }
-
     override fun initCreateView() {
         super.initCreateView()
-        adapter = DynamicRV(vm)
+        adapter = DynamicRV(vm){
+            block(it)
+        }
         mDataBinding.recyclerView.adapter = adapter
         when (dynamicType) {
             DynamicType.日常 -> {

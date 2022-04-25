@@ -1,7 +1,9 @@
 package com.qyl.petmarket.ui.activity
 
 import androidx.activity.viewModels
+import androidx.fragment.app.activityViewModels
 import com.qyl.petmarket.R
+import com.qyl.petmarket.data.vm.BigPhotoVm
 import com.qyl.petmarket.data.vm.DynamicSquareVM
 import com.qyl.petmarket.databinding.ActivityDynamicSearchBinding
 import com.qyl.petmarket.net.NetActivity
@@ -16,6 +18,7 @@ class SearchDynamicActivity : NetActivity<ActivityDynamicSearchBinding>() {
     private lateinit var adapter: DynamicSearchRV
 
     private val vm by viewModels<DynamicSquareVM>()
+    private val photoVm by viewModels<BigPhotoVm>()
 
     override fun init() {
         super.init()
@@ -24,13 +27,13 @@ class SearchDynamicActivity : NetActivity<ActivityDynamicSearchBinding>() {
 
     override fun onPause() {
         super.onPause()
-        vm.bigUrl.postValue(null)
+        photoVm.bigUrl.postValue(null)
     }
 
     private fun initSearchView() {
-        adapter = DynamicSearchRV(vm)
+        adapter = DynamicSearchRV(vm,photoVm)
         mDataBinding.recyclerView.adapter = adapter
-        vm.bigUrl.observe(this){
+        photoVm.bigUrl.observe(this){
             if (it == null) {
                 mDataBinding.flBG.hide()
                 return@observe

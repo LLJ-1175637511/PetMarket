@@ -24,4 +24,10 @@ interface DynamicServer {
         @QueryMap map: Map<String, String>
     ): Call<BaseBean>
 
+    @PUT("Dynamic/LikeParallelism")
+    fun likeDynamic(
+        @QueryMap map: Map<String, String>
+    ): Call<BaseBean>
+
+
 }

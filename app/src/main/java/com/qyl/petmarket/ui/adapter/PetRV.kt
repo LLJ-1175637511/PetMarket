@@ -14,7 +14,7 @@ import com.qyl.petmarket.databinding.ItemPetBinding
 import com.qyl.petmarket.ui.activity.UpdatePetActivity
 import com.qyl.petmarket.utils.convertGeLinTime
 
-class PetRV(private val vm: PetVM) : RecyclerView.Adapter<PetRV.Holder>() {
+class PetRV(private val vm: PetVM,val block: (bigPhoto: String) -> Unit) : RecyclerView.Adapter<PetRV.Holder>() {
 
     private val list = mutableListOf<PetBean>()
 
@@ -30,6 +30,9 @@ class PetRV(private val vm: PetVM) : RecyclerView.Adapter<PetRV.Holder>() {
             binding.tvName.text = item.petName
             binding.tvDelete.setOnClickListener {
                 vm.deletePet(item.id)
+            }
+            binding.ivPhoto.setOnClickListener {
+                block(url)
             }
             binding.tvRevise.setOnClickListener {
                 it.context.startActivity(Intent(it.context,UpdatePetActivity::class.java).apply {

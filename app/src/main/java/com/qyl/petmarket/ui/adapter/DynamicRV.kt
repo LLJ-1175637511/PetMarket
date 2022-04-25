@@ -19,18 +19,22 @@ import com.qyl.petmarket.ui.activity.UpdatePetActivity
 import com.qyl.petmarket.utils.convertGeLinAllTime
 import com.qyl.petmarket.utils.convertGeLinTime
 
-class DynamicRV(private val vm: DynamicSquareVM) : RecyclerView.Adapter<DynamicRV.Holder>() {
+class DynamicRV(private val vm: DynamicSquareVM,val block: (bigPhoto: String) -> Unit) :
+    RecyclerView.Adapter<DynamicRV.Holder>() {
 
     private val list = mutableListOf<DynamicBean>()
 
-    inner class Holder(val binding: ItemDynamicSquareBinding) : RecyclerView.ViewHolder(binding.root) {
+    inner class Holder(val binding: ItemDynamicSquareBinding) :
+        RecyclerView.ViewHolder(binding.root) {
 
-        fun bindData(item: DynamicBean){
+        @SuppressLint("UseCompatLoadingForDrawables")
+        fun bindData(item: DynamicBean) {
             val photoHead = "http://47.110.231.180:8080"
-            Glide.with(binding.root.context).load("${photoHead}${item.headPortrait}").into(binding.ivHead)
+            Glide.with(binding.root.context).load("${photoHead}${item.headPortrait}")
+                .into(binding.ivHead)
             binding.tvName.text = item.author
-            binding.tvTime.text = item.publishTime.replace('T',' ')
-            binding.tvLikeCount.text = item.likedNums.toString()
+            binding.tvTime.text = item.publishTime.replace('T', ' ')
+
             item.dynamicContent?.let {
                 binding.tvContent.visibility = View.VISIBLE
                 binding.tvContent.text = it
@@ -40,17 +44,20 @@ class DynamicRV(private val vm: DynamicSquareVM) : RecyclerView.Adapter<DynamicR
                 binding.ivPhoto.visibility = View.VISIBLE
                 Glide.with(binding.root.context).load(u).into(binding.ivPhoto)
                 binding.ivPhoto.setOnClickListener {
-                    vm.bigUrl.postValue(u)
+                    block(u)
                 }
             }
-            binding.ivLike.setOnClickListener {
+            binding.ivLike.init(item.isLiked, item.likedNums)
 
+            binding.ivLike.setOnClickListener {
+                vm.likeDynamic(item.id) {
+                    binding.ivLike.clicked()
+                }
             }
         }
-
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int):Holder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder {
         val binding = DataBindingUtil.inflate<ItemDynamicSquareBinding>(
             LayoutInflater.from(parent.context),
             R.layout.item_dynamic_square,
@@ -65,7 +72,7 @@ class DynamicRV(private val vm: DynamicSquareVM) : RecyclerView.Adapter<DynamicR
     }
 
     @SuppressLint("NotifyDataSetChanged")
-    fun update(data:List<DynamicBean>){
+    fun update(data: List<DynamicBean>) {
         list.clear()
         list.addAll(data)
         notifyDataSetChanged()

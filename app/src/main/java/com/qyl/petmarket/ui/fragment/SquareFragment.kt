@@ -14,6 +14,7 @@ import com.bumptech.glide.Glide
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import com.qyl.petmarket.R
+import com.qyl.petmarket.data.vm.BigPhotoVm
 import com.qyl.petmarket.data.vm.DynamicSquareVM
 import com.qyl.petmarket.databinding.FragmentSquareBinding
 import com.qyl.petmarket.ui.activity.AddDynamicActivity
@@ -22,13 +23,11 @@ import com.qyl.petmarket.utils.LogUtils
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
-class SquareFragment : BaseFragment<FragmentSquareBinding>() {
+class SquareFragment : BaseMainFragment<FragmentSquareBinding>() {
 
     override fun getLayoutId() = R.layout.fragment_square
 
     private val tabList = arrayOf("日常", "科普", "好物")
-
-    private val vm by activityViewModels<DynamicSquareVM>()
 
     override fun initCreateView() {
         super.initCreateView()
@@ -41,11 +40,6 @@ class SquareFragment : BaseFragment<FragmentSquareBinding>() {
         }
     }
 
-    override fun onPause() {
-        super.onPause()
-        vm.bigUrl.postValue(null)
-    }
-
     inner class PageAdapter(fa: FragmentActivity) : FragmentStateAdapter(fa) {
         override fun getItemCount() = tabList.size
 
@@ -55,7 +49,9 @@ class SquareFragment : BaseFragment<FragmentSquareBinding>() {
                 1 -> DynamicFragment.DynamicType.科普
                 else -> DynamicFragment.DynamicType.好物
             }
-            return DynamicFragment(t)
+            return DynamicFragment(t){
+                photoVm.bigUrl.postValue(it)
+            }
         }
 
 

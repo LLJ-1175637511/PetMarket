@@ -21,7 +21,6 @@
             android:hint="输入关键词"
             android:padding="8dp"
             android:textSize="14sp"
-            android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@+id/tvFilter"
             app:layout_constraintEnd_toStartOf="@+id/tvFilter"
             app:layout_constraintStart_toStartOf="parent"

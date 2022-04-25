@@ -13,11 +13,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.qyl.petmarket.R
 import com.qyl.petmarket.data.bean.DynamicBean
+import com.qyl.petmarket.data.vm.BigPhotoVm
 import com.qyl.petmarket.data.vm.DynamicSquareVM
 import com.qyl.petmarket.databinding.ItemDynamicSearchBinding
 
 
-class DynamicSearchRV(private val vm: DynamicSquareVM) :
+class DynamicSearchRV(private val vm: DynamicSquareVM, private val photoVm: BigPhotoVm) :
     RecyclerView.Adapter<DynamicSearchRV.Holder>() {
 
     private val list = mutableListOf<DynamicBean>()
@@ -34,13 +35,13 @@ class DynamicSearchRV(private val vm: DynamicSquareVM) :
             binding.tvName.text = item.author
             binding.tvType.text = item.dynamicKind
             binding.tvTime.text = item.publishTime.replace('T', ' ')
-            binding.tvLikeCount.text = item.likedNums.toString()
             item.dynamicContent?.let {
+                if (mSearchContent.isEmpty()) return@let
                 val style = SpannableStringBuilder(it)
                 val s = it.indexOf(mSearchContent)
                 style.setSpan(
                     ForegroundColorSpan(Color.RED),
-                    s,
+                    if (s < 0) 0 else s,
                     s + mSearchContent.length,
                     Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
                 )
@@ -52,11 +53,15 @@ class DynamicSearchRV(private val vm: DynamicSquareVM) :
                 binding.ivPhoto.visibility = View.VISIBLE
                 Glide.with(binding.root.context).load(u).into(binding.ivPhoto)
                 binding.ivPhoto.setOnClickListener {
-                    vm.bigUrl.postValue(u)
+                    photoVm.bigUrl.postValue(u)
                 }
             }
-            binding.ivLike.setOnClickListener {
+            binding.ivLike.init(item.isLiked, item.likedNums)
 
+            binding.ivLike.setOnClickListener {
+                vm.likeDynamic(item.id) {
+                    binding.ivLike.clicked()
+                }
             }
         }
 

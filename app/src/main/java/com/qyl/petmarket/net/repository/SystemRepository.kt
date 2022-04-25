@@ -24,5 +24,6 @@ object SystemRepository {
     suspend fun addDynamicRequest(map: Map<String, String>) = SystemNetWork.addDynamic(map)
 
     suspend fun findDynamicRequest(map: Map<String, String>) = SystemNetWork.findDynamic(map)
+    suspend fun likeDynamicRequest(map: Map<String, String>) = SystemNetWork.likeDynamic(map)
 
 }
