@@ -1,10 +1,7 @@
 package com.qyl.petmarket.ui.adapter
 
 import android.annotation.SuppressLint
-import android.graphics.Color
-import android.text.Spannable
-import android.text.SpannableStringBuilder
-import android.text.style.ForegroundColorSpan
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,68 +10,65 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.qyl.petmarket.R
 import com.qyl.petmarket.data.bean.DynamicBean
-import com.qyl.petmarket.data.vm.BigPhotoVm
 import com.qyl.petmarket.data.vm.DynamicSquareVM
-import com.qyl.petmarket.databinding.ItemDynamicSearchBinding
+import com.qyl.petmarket.databinding.ItemDynamicSquareBinding
+import com.qyl.petmarket.ui.activity.DynamicUserActivity
 
-
-class DynamicSearchRV(private val vm: DynamicSquareVM, private val photoVm: BigPhotoVm) :
-    RecyclerView.Adapter<DynamicSearchRV.Holder>() {
+class DynamicSquareRV(
+    private val squareVm: DynamicSquareVM,
+    val block: (bigPhoto: String) -> Unit
+) :
+    RecyclerView.Adapter<DynamicSquareRV.Holder>() {
 
     private val list = mutableListOf<DynamicBean>()
 
-    private var mSearchContent = ""
-
-    inner class Holder(val binding: ItemDynamicSearchBinding) :
+    inner class Holder(val binding: ItemDynamicSquareBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
+        @SuppressLint("UseCompatLoadingForDrawables")
         fun bindData(item: DynamicBean) {
             val photoHead = "http://47.110.231.180:8080"
             Glide.with(binding.root.context).load("${photoHead}${item.headPortrait}")
                 .into(binding.ivHead)
             binding.tvName.text = item.author
-            binding.tvType.text = item.dynamicKind
             binding.tvTime.text = item.publishTime.replace('T', ' ')
+
             item.dynamicContent?.let {
-                if (mSearchContent.isEmpty()) return@let
-                val style = SpannableStringBuilder(it)
-                val s = it.indexOf(mSearchContent)
-                style.setSpan(
-                    ForegroundColorSpan(Color.RED),
-                    if (s < 0) 0 else s,
-                    s + mSearchContent.length,
-                    Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
-                )
                 binding.tvContent.visibility = View.VISIBLE
-                binding.tvContent.text = style
+                binding.tvContent.text = it
             }
             item.dynamicPicture?.let {
                 val u = "${photoHead}${it}"
                 binding.ivPhoto.visibility = View.VISIBLE
                 Glide.with(binding.root.context).load(u).into(binding.ivPhoto)
                 binding.ivPhoto.setOnClickListener {
-                    photoVm.bigUrl.postValue(u)
+                    block(u)
                 }
             }
             binding.ivLike.init(item.isLiked, item.likedNums)
 
             binding.ivLike.setOnClickListener {
-                vm.likeDynamic(item.id) {
+                squareVm.likeDynamic(item.id) {
                     binding.ivLike.clicked()
                 }
             }
+
+            binding.ivHead.setOnClickListener {
+                binding.root.context.startActivity(
+                    Intent(
+                        binding.root.context,
+                        DynamicUserActivity::class.java
+                    ).apply {
+                        putExtra(DynamicUserActivity.TAG_AUTHOR, item.author)
+                    })
+            }
         }
-
-    }
-
-    fun setContent(str: String) {
-        mSearchContent = str
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder {
-        val binding = DataBindingUtil.inflate<ItemDynamicSearchBinding>(
+        val binding = DataBindingUtil.inflate<ItemDynamicSquareBinding>(
             LayoutInflater.from(parent.context),
-            R.layout.item_dynamic_search,
+            R.layout.item_dynamic_square,
             parent,
             false
         )

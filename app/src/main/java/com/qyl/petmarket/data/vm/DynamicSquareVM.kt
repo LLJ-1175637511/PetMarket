@@ -12,12 +12,9 @@ class DynamicSquareVM : NetVM() {
 
     val freshState = MutableLiveData<Boolean>()
 
-
     val normalList = MutableLiveData<List<DynamicBean>>()
     val scienceList = MutableLiveData<List<DynamicBean>>()
     val goodThingList = MutableLiveData<List<DynamicBean>>()
-
-    val searchList = MutableLiveData<List<DynamicBean>>()
 
     fun queryData(type: DynamicFragment.DynamicType) {
         viewModelScope.launch {
@@ -33,18 +30,6 @@ class DynamicSquareVM : NetVM() {
                 }
             }
             freshState.postValue(true)
-        }
-    }
-
-    fun querySearchData(content: String) {
-        viewModelScope.launch {
-            fastRequest<List<DynamicBean>> {
-                SystemRepository.findDynamicRequest(
-                    SysNetConfig.buildQueryDynamicMap(null, null, content)
-                )
-            }?.let {
-                searchList.postValue(it)
-            }
         }
     }
 

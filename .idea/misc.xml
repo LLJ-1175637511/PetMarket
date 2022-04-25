@@ -23,6 +23,7 @@
         <entry key="app/src/main/res/layout/activity_add_pet.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_choose_hobby.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_dynamic_add.xml" value="0.18478260869565216" />
+        <entry key="app/src/main/res/layout/activity_dynamic_mine.xml" value="0.18478260869565216" />
         <entry key="app/src/main/res/layout/activity_dynamic_search.xml" value="0.18478260869565216" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.15896739130434784" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.15070921985815602" />
@@ -43,6 +44,7 @@
         <entry key="app/src/main/res/layout/fragment_user.xml" value="0.25" />
         <entry key="app/src/main/res/layout/item_dynamic_search.xml" value="0.25" />
         <entry key="app/src/main/res/layout/item_dynamic_square.xml" value="0.2991197668987772" />
+        <entry key="app/src/main/res/layout/item_dynamic_user.xml" value="0.25" />
         <entry key="app/src/main/res/layout/item_pet.xml" value="0.25" />
         <entry key="app/src/main/res/layout/tab_text.xml" value="0.18478260869565216" />
         <entry key="app/src/main/res/layout/toolbar.xml" value="0.18478260869565216" />

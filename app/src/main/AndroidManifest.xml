@@ -46,6 +46,7 @@
         <activity android:name=".ui.activity.UpdatePetActivity" />
         <activity android:name=".ui.activity.SearchDynamicActivity" />
         <activity android:name=".ui.activity.AddDynamicActivity" />
+        <activity android:name=".ui.activity.DynamicUserActivity" />
     </application>
 
 </manifest>

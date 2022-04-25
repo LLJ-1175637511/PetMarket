@@ -43,6 +43,7 @@ object SystemNetWork {
         petServer.findPet(username).await()
 
     suspend fun deletePet(id: Int) = petServer.deletePet(id).await()
+    suspend fun deleteDynamic(id: Int) = dynamicServer.deleteDynamic(id).await()
 
     suspend fun updatePet(map: Map<String, String>, photo: MultipartBody.Part) =
         petServer.updatePet(map, photo).await()

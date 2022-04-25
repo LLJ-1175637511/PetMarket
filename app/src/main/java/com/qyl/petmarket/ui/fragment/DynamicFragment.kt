@@ -1,20 +1,12 @@
 package com.qyl.petmarket.ui.fragment
 
-import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
-import com.bumptech.glide.Glide
 import com.qyl.petmarket.R
-import com.qyl.petmarket.data.bean.DynamicBean
-import com.qyl.petmarket.data.bean.LoginBean
-import com.qyl.petmarket.data.vm.BigPhotoVm
 import com.qyl.petmarket.data.vm.DynamicSquareVM
 import com.qyl.petmarket.databinding.FragmentPetDynamicBinding
-import com.qyl.petmarket.databinding.FragmentUserBinding
 import com.qyl.petmarket.net.NetFragment
-import com.qyl.petmarket.ui.activity.user.UserActivity
-import com.qyl.petmarket.ui.adapter.DynamicRV
-import com.qyl.petmarket.utils.LogUtils
+import com.qyl.petmarket.ui.adapter.DynamicSquareRV
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
@@ -25,7 +17,7 @@ class DynamicFragment(private val dynamicType: DynamicType,val block: (bigPhoto:
 
     private val vm by viewModels<DynamicSquareVM>()
 
-    private lateinit var adapter: DynamicRV
+    private lateinit var adapter: DynamicSquareRV
 
     override fun initCreate() {
         super.initCreate()
@@ -34,7 +26,7 @@ class DynamicFragment(private val dynamicType: DynamicType,val block: (bigPhoto:
 
     override fun initCreateView() {
         super.initCreateView()
-        adapter = DynamicRV(vm){
+        adapter = DynamicSquareRV(vm){
             block(it)
         }
         mDataBinding.recyclerView.adapter = adapter

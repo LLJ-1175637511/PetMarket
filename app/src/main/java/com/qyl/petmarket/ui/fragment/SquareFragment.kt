@@ -2,28 +2,19 @@ package com.qyl.petmarket.ui.fragment
 
 import android.annotation.SuppressLint
 import android.os.Build
-import android.view.View
 import android.widget.TextView
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
-import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.lifecycleScope
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import com.bumptech.glide.Glide
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import com.qyl.petmarket.R
-import com.qyl.petmarket.data.vm.BigPhotoVm
-import com.qyl.petmarket.data.vm.DynamicSquareVM
 import com.qyl.petmarket.databinding.FragmentSquareBinding
 import com.qyl.petmarket.ui.activity.AddDynamicActivity
 import com.qyl.petmarket.ui.activity.SearchDynamicActivity
-import com.qyl.petmarket.utils.LogUtils
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
 
-class SquareFragment : BaseMainFragment<FragmentSquareBinding>() {
+class SquareFragment : BaseBigPhotoFragment<FragmentSquareBinding>() {
 
     override fun getLayoutId() = R.layout.fragment_square
 

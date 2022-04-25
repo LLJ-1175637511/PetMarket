@@ -102,6 +102,13 @@ object SysNetConfig {
         DynamicId to id.toString()
     )
 
+    fun buildUserDynamic(author: String? = null) = mutableMapOf<String, String>().apply {
+        put(UserName, getUserName())
+        author?.let {
+            put(Author, it)
+        }
+    }
+
     fun buildQueryDynamicMap(
         author: String?,
         dynamicKind: String?,

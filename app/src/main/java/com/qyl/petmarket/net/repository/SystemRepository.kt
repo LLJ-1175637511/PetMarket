@@ -16,6 +16,7 @@ object SystemRepository {
     suspend fun findPetRequest() = SystemNetWork.findPet()
 
     suspend fun deletePetRequest(id:Int) = SystemNetWork.deletePet(id)
+    suspend fun deleteDynamicRequest(id:Int) = SystemNetWork.deleteDynamic(id)
 
     suspend fun updatePetRequest(map: Map<String, String>,photo: MultipartBody.Part) = SystemNetWork.updatePet(map,photo)
     suspend fun updatePetRequest(map: Map<String, String>) = SystemNetWork.updatePet(map)
