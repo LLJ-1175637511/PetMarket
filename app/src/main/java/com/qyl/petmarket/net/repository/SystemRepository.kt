@@ -7,6 +7,8 @@ object SystemRepository {
 
     suspend fun loginRequest(map: Map<String, String>) = SystemNetWork.login(map)
 
+    suspend fun userRequest(map: Map<String, String>) = SystemNetWork.getUser(map)
+
     suspend fun preferenceRequest(preference: String) = SystemNetWork.preference(preference)
 
     suspend fun registerRequest(map: Map<String, String>,photo: MultipartBody.Part) = SystemNetWork.register(map,photo)
@@ -27,7 +29,7 @@ object SystemRepository {
     suspend fun findDynamicRequest(map: Map<String, String>) = SystemNetWork.findDynamic(map)
     suspend fun likeDynamicRequest(map: Map<String, String>) = SystemNetWork.likeDynamic(map)
 
-    suspend fun queryLikeRecordRequest(map: Map<String, String>) = SystemNetWork.queryLikeRecord(map)
+    suspend fun queryLikeRecordRequest() = SystemNetWork.queryLikeRecord()
 
 
 }

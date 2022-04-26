@@ -5,6 +5,7 @@ import com.qyl.petmarket.R
 import com.qyl.petmarket.data.bean.LoginBean
 import com.qyl.petmarket.databinding.FragmentUserBinding
 import com.qyl.petmarket.net.NetFragment
+import com.qyl.petmarket.ui.activity.LikeRecordActivity
 import com.qyl.petmarket.ui.activity.MyDynamicActivity
 import com.qyl.petmarket.ui.activity.user.UserActivity
 
@@ -28,7 +29,7 @@ class UserMineFragment : NetFragment<FragmentUserBinding>() {
             startCommonActivity<MyDynamicActivity>()
         }
         mDataBinding.tvLike.setOnClickListener {
-            startCommonActivity<MyDynamicActivity>()
+            startCommonActivity<LikeRecordActivity>()
         }
     }
 

@@ -41,6 +41,7 @@
         <activity android:name=".ui.activity.SearchDynamicActivity" />
         <activity android:name=".ui.activity.AddDynamicActivity" />
         <activity android:name=".ui.activity.MyDynamicActivity" />
+        <activity android:name=".ui.activity.LikeRecordActivity" />
     </application>
 
 </manifest>

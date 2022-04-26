@@ -17,6 +17,7 @@ object SystemNetWork {
     private val dynamicServer by lazy { RetrofitCreator.create<DynamicServer>() }
 
     suspend fun login(map: Map<String, String>) = userServer.login(map).await()
+    suspend fun getUser(map: Map<String, String>) = userServer.getUser(map).await()
 
     suspend fun preference(preference: String, username: String = SysNetConfig.getUserName()) =
         userServer.preference(preference, username).await()
@@ -39,8 +40,8 @@ object SystemNetWork {
     suspend fun likeDynamic(map: Map<String, String>) =
         dynamicServer.likeDynamic(map).await()
 
-    suspend fun queryLikeRecord(map: Map<String, String>) =
-        dynamicServer.queryLikeRecord(map).await()
+    suspend fun queryLikeRecord(username: String = SysNetConfig.getUserName()) =
+        dynamicServer.queryLikeRecord(username).await()
 
     suspend fun findPet(username: String) =
         petServer.findPet(username).await()

@@ -51,6 +51,8 @@ object SysNetConfig {
         pass: String
     ) = mapOf(UserName to user, UserPwd to pass)
 
+    fun buildGetUserMap() = mapOf(UserName to getUserName())
+
     fun buildRegisterMap(
         username: String,
         password: String,
@@ -107,10 +109,6 @@ object SysNetConfig {
         author?.let {
             put(Author, it)
         }
-    }
-
-    fun buildLikeRecord(author: String? = null) = mutableMapOf<String, String>().apply {
-
     }
 
     fun buildQueryDynamicMap(

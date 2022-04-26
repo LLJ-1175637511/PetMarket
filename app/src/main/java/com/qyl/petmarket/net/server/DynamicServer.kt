@@ -35,9 +35,9 @@ interface DynamicServer {
         @QueryMap map: Map<String, String>
     ): Call<BaseBean>
 
-    @GET("Dynamic/LikeParallelism")
+    @GET("Dynamic/GetLikeInfoList")
     fun queryLikeRecord(
-        @QueryMap map: Map<String, String>
+        @Query(SysNetConfig.UserName) username: String
     ): Call<BaseBean>
 
 

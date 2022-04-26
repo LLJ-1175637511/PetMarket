@@ -11,8 +11,14 @@ interface UserServer {
     @GET("Account/Login")
     fun login(@QueryMap map: Map<String, String>): Call<BaseBean>
 
+    @GET("Account/GetUser")
+    fun getUser(@QueryMap map: Map<String, String>): Call<BaseBean>
+
     @PUT("Account/UpdatePreference")
-    fun preference(@Query(SysNetConfig.Preference) preference: String,@Query(SysNetConfig.UserName) username: String): Call<BaseBean>
+    fun preference(
+        @Query(SysNetConfig.Preference) preference: String,
+        @Query(SysNetConfig.UserName) username: String
+    ): Call<BaseBean>
 
     @Multipart
     @POST("Account/AddUser")
@@ -20,5 +26,6 @@ interface UserServer {
         @QueryMap map: Map<String, String>,
         @Part photo: MultipartBody.Part
     ): Call<BaseBean>
+
 
 }

@@ -17,7 +17,7 @@ import com.qyl.petmarket.utils.ToastUtils
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-abstract class NetFragment<DB : ViewDataBinding>:BaseFragment<DB>(){
+abstract class NetFragment<DB : ViewDataBinding> : BaseFragment<DB>() {
 
     suspend inline fun <reified T> fastRequest(
         crossinline block: suspend () -> BaseBean
@@ -39,17 +39,11 @@ abstract class NetFragment<DB : ViewDataBinding>:BaseFragment<DB>(){
         data
     }
 
-    fun getUserData(
-        username: String = ECLib.getSP(Const.SPUser).getString(Const.SPUserName, "") ?: "",
-        password: String = ECLib.getSP(Const.SPUser).getString(Const.SPUserPwd, "") ?: "",
-        block: (data: LoginBean) -> Unit
-    ) {
+    fun getUserData(block: (data: LoginBean) -> Unit) {
         lifecycleScope.launch {
             fastRequest<LoginBean> {
-                SystemRepository.loginRequest(
-                    SysNetConfig.buildLoginMap(
-                        username, password
-                    )
+                SystemRepository.userRequest(
+                    SysNetConfig.buildGetUserMap()
                 )
             }?.let {
                 block(it)
