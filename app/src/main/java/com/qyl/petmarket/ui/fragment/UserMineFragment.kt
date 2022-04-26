@@ -5,10 +5,10 @@ import com.qyl.petmarket.R
 import com.qyl.petmarket.data.bean.LoginBean
 import com.qyl.petmarket.databinding.FragmentUserBinding
 import com.qyl.petmarket.net.NetFragment
-import com.qyl.petmarket.ui.activity.DynamicUserActivity
+import com.qyl.petmarket.ui.activity.MyDynamicActivity
 import com.qyl.petmarket.ui.activity.user.UserActivity
 
-class UserFragment : NetFragment<FragmentUserBinding>() {
+class UserMineFragment : NetFragment<FragmentUserBinding>() {
 
     override fun getLayoutId() = R.layout.fragment_user
 
@@ -25,7 +25,10 @@ class UserFragment : NetFragment<FragmentUserBinding>() {
             startCommonActivity<UserActivity>()
         }
         mDataBinding.tvDynamic.setOnClickListener {
-            startCommonActivity<DynamicUserActivity>()
+            startCommonActivity<MyDynamicActivity>()
+        }
+        mDataBinding.tvLike.setOnClickListener {
+            startCommonActivity<MyDynamicActivity>()
         }
     }
 

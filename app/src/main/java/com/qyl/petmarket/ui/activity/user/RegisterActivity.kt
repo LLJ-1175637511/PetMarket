@@ -9,7 +9,9 @@ import com.qyl.petmarket.ext.save
 import com.qyl.petmarket.net.config.SysNetConfig
 import com.qyl.petmarket.net.repository.SystemRepository
 import com.qyl.petmarket.ui.activity.BaseAddPhotoActivity
-import com.qyl.petmarket.utils.*
+import com.qyl.petmarket.utils.Const
+import com.qyl.petmarket.utils.ECLib
+import com.qyl.petmarket.utils.ToastUtils
 import kotlinx.coroutines.launch
 
 class RegisterActivity : BaseAddPhotoActivity<ActivityRegisterBinding>() {

@@ -33,13 +33,16 @@ object SystemNetWork {
     suspend fun addDynamic(map: Map<String, String>) =
         dynamicServer.addDynamic(map).await()
 
- suspend fun findDynamic(map: Map<String, String>) =
+    suspend fun findDynamic(map: Map<String, String>) =
         dynamicServer.findDynamic(map).await()
 
- suspend fun likeDynamic(map: Map<String, String>) =
+    suspend fun likeDynamic(map: Map<String, String>) =
         dynamicServer.likeDynamic(map).await()
 
-    suspend fun findPet(username: String = SysNetConfig.getUserName()) =
+    suspend fun queryLikeRecord(map: Map<String, String>) =
+        dynamicServer.queryLikeRecord(map).await()
+
+    suspend fun findPet(username: String) =
         petServer.findPet(username).await()
 
     suspend fun deletePet(id: Int) = petServer.deletePet(id).await()

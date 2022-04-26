@@ -29,7 +29,7 @@ class DynamicOtherRV(private val dynamicUserVM: DynamicUserVM, private val photo
     inner class Holder(val binding: ItemDynamicUserBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bindData(item: DynamicBean,position: Int) {
+        fun bindData(item: DynamicBean) {
             val photoHead = "http://47.110.231.180:8080"
             Glide.with(binding.root.context).load("${photoHead}${item.headPortrait}")
                 .into(binding.ivHead)
@@ -37,17 +37,20 @@ class DynamicOtherRV(private val dynamicUserVM: DynamicUserVM, private val photo
             binding.tvType.text = item.dynamicKind
             binding.tvTime.text = item.publishTime.replace('T', ' ')
             item.dynamicContent?.let {
-                if (mSearchContent.isEmpty()) return@let
-                val style = SpannableStringBuilder(it)
-                val s = it.indexOf(mSearchContent)
-                style.setSpan(
-                    ForegroundColorSpan(Color.RED),
-                    if (s < 0) 0 else s,
-                    s + mSearchContent.length,
-                    Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
-                )
+                if (mSearchContent.isNotEmpty()) {
+                    val style = SpannableStringBuilder(it)
+                    val s = it.indexOf(mSearchContent)
+                    style.setSpan(
+                        ForegroundColorSpan(Color.RED),
+                        if (s < 0) 0 else s,
+                        s + mSearchContent.length,
+                        Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+                    )
+                    binding.tvContent.text = style
+                }else{
+                    binding.tvContent.text = it
+                }
                 binding.tvContent.visibility = View.VISIBLE
-                binding.tvContent.text = style
             }
             item.dynamicPicture?.let {
                 val u = "${photoHead}${it}"
@@ -62,7 +65,7 @@ class DynamicOtherRV(private val dynamicUserVM: DynamicUserVM, private val photo
                 binding.tvDelete.visibility = View.VISIBLE
                 binding.tvDelete.setOnClickListener {
                     dynamicUserVM.deleteDynamic(item.id){
-                        removeItem(position)
+                        removeItem(adapterPosition)
                     }
                 }
             }
@@ -75,7 +78,6 @@ class DynamicOtherRV(private val dynamicUserVM: DynamicUserVM, private val photo
                 }
             }
         }
-
     }
 
     fun removeItem(p:Int){
@@ -98,7 +100,7 @@ class DynamicOtherRV(private val dynamicUserVM: DynamicUserVM, private val photo
     }
 
     override fun onBindViewHolder(holder: Holder, position: Int) {
-        holder.bindData(list[position],position)
+        holder.bindData(list[position])
     }
 
     @SuppressLint("NotifyDataSetChanged")

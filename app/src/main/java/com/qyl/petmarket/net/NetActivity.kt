@@ -3,7 +3,10 @@ package com.qyl.petmarket.net
 import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.lifecycleScope
 import com.qyl.petmarket.data.bean.LoginBean
-import com.qyl.petmarket.ext.*
+import com.qyl.petmarket.ext.NET_DATA_TAG
+import com.qyl.petmarket.ext.NET_EXC_TAG
+import com.qyl.petmarket.ext.baseConverter
+import com.qyl.petmarket.ext.isCodeSuc
 import com.qyl.petmarket.net.config.SysNetConfig
 import com.qyl.petmarket.net.repository.SystemRepository
 import com.qyl.petmarket.ui.activity.BaseActivity

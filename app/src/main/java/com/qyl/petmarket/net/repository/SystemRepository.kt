@@ -13,7 +13,7 @@ object SystemRepository {
 
     suspend fun addPetRequest(map: Map<String, String>,photo: MultipartBody.Part) = SystemNetWork.addPet(map,photo)
 
-    suspend fun findPetRequest() = SystemNetWork.findPet()
+    suspend fun findPetRequest(username: String) = SystemNetWork.findPet(username)
 
     suspend fun deletePetRequest(id:Int) = SystemNetWork.deletePet(id)
     suspend fun deleteDynamicRequest(id:Int) = SystemNetWork.deleteDynamic(id)
@@ -26,5 +26,8 @@ object SystemRepository {
 
     suspend fun findDynamicRequest(map: Map<String, String>) = SystemNetWork.findDynamic(map)
     suspend fun likeDynamicRequest(map: Map<String, String>) = SystemNetWork.likeDynamic(map)
+
+    suspend fun queryLikeRecordRequest(map: Map<String, String>) = SystemNetWork.queryLikeRecord(map)
+
 
 }

@@ -19,7 +19,7 @@
 
     <fragment
         android:id="@+id/navigation_user"
-        android:name="com.qyl.petmarket.ui.fragment.UserFragment"
+        android:name="com.qyl.petmarket.ui.fragment.UserMineFragment"
         android:label="@string/title_user"
         tools:layout="@layout/fragment_user" />
 </navigation>

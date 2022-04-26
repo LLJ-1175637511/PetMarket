@@ -1,38 +1,20 @@
 package com.qyl.petmarket.ui.activity
 
-import android.annotation.SuppressLint
-import android.app.Activity
-import android.content.Intent
-import android.graphics.Bitmap
 import android.net.Uri
-import android.os.Build
-import android.os.Environment
-import android.provider.Settings
-import androidx.activity.result.ActivityResultLauncher
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.lifecycleScope
-import cn.leancloud.LCFile
-import cn.leancloud.callback.ProgressCallback
 import com.bumptech.glide.Glide
 import com.qyl.petmarket.R
 import com.qyl.petmarket.databinding.ActivityAddPetBinding
 import com.qyl.petmarket.databinding.DialogChooseDateBinding
-import com.qyl.petmarket.net.NetActivity
 import com.qyl.petmarket.net.config.SysNetConfig
 import com.qyl.petmarket.net.repository.SystemRepository
-import com.qyl.petmarket.utils.PhotoUtils
 import com.qyl.petmarket.utils.ToastUtils
 import com.qyl.petmarket.utils.addZero
-import id.zelory.compressor.Compressor
-import id.zelory.compressor.constraint.format
-import id.zelory.compressor.constraint.quality
-import id.zelory.compressor.constraint.size
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import java.io.File
 
 
 class AddPetActivity : BaseAddPhotoActivity<ActivityAddPetBinding>() {

@@ -10,7 +10,6 @@
         <include layout="@layout/toolbar" android:id="@+id/toolbar"/>
 
         <androidx.recyclerview.widget.RecyclerView
-            android:padding="5dp"
             android:id="@+id/recyclerView"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             android:layout_width="match_parent"
@@ -35,7 +34,7 @@
                 android:text="添加宠物"
                 android:textStyle="bold"
                 android:drawablePadding="15dp"
-                android:textSize="18sp"
+                android:textSize="14sp"
                 android:gravity="center"
                 android:textColor="@color/qq_blue"
                 android:clickable="false"

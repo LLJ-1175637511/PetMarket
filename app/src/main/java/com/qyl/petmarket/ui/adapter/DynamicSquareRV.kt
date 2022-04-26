@@ -12,7 +12,7 @@ import com.qyl.petmarket.R
 import com.qyl.petmarket.data.bean.DynamicBean
 import com.qyl.petmarket.data.vm.DynamicSquareVM
 import com.qyl.petmarket.databinding.ItemDynamicSquareBinding
-import com.qyl.petmarket.ui.activity.DynamicUserActivity
+import com.qyl.petmarket.ui.activity.user.OtherUserActivity
 
 class DynamicSquareRV(
     private val squareVm: DynamicSquareVM,
@@ -57,9 +57,9 @@ class DynamicSquareRV(
                 binding.root.context.startActivity(
                     Intent(
                         binding.root.context,
-                        DynamicUserActivity::class.java
+                        OtherUserActivity::class.java
                     ).apply {
-                        putExtra(DynamicUserActivity.TAG_AUTHOR, item.author)
+                        putExtra(OtherUserActivity.TAG_AUTHOR,item.author)
                     })
             }
         }

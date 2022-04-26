@@ -5,21 +5,11 @@ import android.content.pm.PackageManager
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.databinding.ViewDataBinding
-import androidx.lifecycle.lifecycleScope
-import cn.leancloud.LCUser
-import com.qyl.petmarket.data.bean.LoginBean
 import com.qyl.petmarket.ext.save
 import com.qyl.petmarket.net.NetActivity
-import com.qyl.petmarket.net.config.SysNetConfig
-import com.qyl.petmarket.net.repository.SystemRepository
-import com.qyl.petmarket.ui.activity.BaseActivity
 import com.qyl.petmarket.utils.Const
 import com.qyl.petmarket.utils.ECLib
-import com.qyl.petmarket.utils.LCUtils
 import com.qyl.petmarket.utils.ToastUtils
-import io.reactivex.Observer
-import io.reactivex.disposables.Disposable
-import kotlinx.coroutines.launch
 
 
 abstract class BaseLoginActivity<DB : ViewDataBinding> : NetActivity<DB>() {

@@ -109,6 +109,10 @@ object SysNetConfig {
         }
     }
 
+    fun buildLikeRecord(author: String? = null) = mutableMapOf<String, String>().apply {
+
+    }
+
     fun buildQueryDynamicMap(
         author: String?,
         dynamicKind: String?,

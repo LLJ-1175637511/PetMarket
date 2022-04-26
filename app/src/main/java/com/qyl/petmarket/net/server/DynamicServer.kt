@@ -35,5 +35,10 @@ interface DynamicServer {
         @QueryMap map: Map<String, String>
     ): Call<BaseBean>
 
+    @GET("Dynamic/LikeParallelism")
+    fun queryLikeRecord(
+        @QueryMap map: Map<String, String>
+    ): Call<BaseBean>
+
 
 }

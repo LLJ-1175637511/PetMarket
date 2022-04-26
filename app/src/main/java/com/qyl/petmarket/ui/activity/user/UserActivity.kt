@@ -3,24 +3,15 @@ package com.qyl.petmarket.ui.activity.user
 import android.app.Activity
 import android.content.Intent
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.lifecycle.lifecycleScope
-import cn.leancloud.LCUser
 import com.bumptech.glide.Glide
 import com.qyl.petmarket.R
 import com.qyl.petmarket.data.bean.LoginBean
-import com.qyl.petmarket.databinding.ActivityUserBinding
-import com.qyl.petmarket.ext.string
+import com.qyl.petmarket.databinding.ActivityUserMineBinding
 import com.qyl.petmarket.net.NetActivity
-import com.qyl.petmarket.net.config.SysNetConfig
-import com.qyl.petmarket.net.repository.SystemRepository
-import com.qyl.petmarket.ui.activity.BaseActivity
-import com.qyl.petmarket.utils.Const
-import com.qyl.petmarket.utils.LCUtils
-import kotlinx.coroutines.launch
 
-class UserActivity : NetActivity<ActivityUserBinding>() {
+class UserActivity : NetActivity<ActivityUserMineBinding>() {
 
-    override fun getLayoutId() = R.layout.activity_user
+    override fun getLayoutId() = R.layout.activity_user_mine
 
     private val launch =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { ar ->

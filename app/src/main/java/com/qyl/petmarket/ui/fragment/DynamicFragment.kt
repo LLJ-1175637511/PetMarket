@@ -19,8 +19,8 @@ class DynamicFragment(private val dynamicType: DynamicType,val block: (bigPhoto:
 
     private lateinit var adapter: DynamicSquareRV
 
-    override fun initCreate() {
-        super.initCreate()
+    override fun onResume() {
+        super.onResume()
         vm.queryData(dynamicType)
     }
 

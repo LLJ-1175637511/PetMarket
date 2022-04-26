@@ -1,25 +1,18 @@
 package com.qyl.petmarket.ui.activity.user
 
-import android.app.Activity
 import android.content.Intent
 import android.view.View
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
-import cn.leancloud.LCObject
-import cn.leancloud.LCUser
 import com.qyl.petmarket.R
 import com.qyl.petmarket.databinding.ActivityChooseHobbyBinding
 import com.qyl.petmarket.ext.save
 import com.qyl.petmarket.net.NetActivity
 import com.qyl.petmarket.net.repository.SystemRepository
-import com.qyl.petmarket.ui.activity.BaseActivity
 import com.qyl.petmarket.ui.activity.MainActivity
-import com.qyl.petmarket.utils.*
-import io.reactivex.Observer
-import io.reactivex.disposables.Disposable
+import com.qyl.petmarket.utils.Const
+import com.qyl.petmarket.utils.ECLib
 import kotlinx.coroutines.launch
-import java.lang.StringBuilder
 
 class ChooseHobbyActivity : NetActivity<ActivityChooseHobbyBinding>() {
 

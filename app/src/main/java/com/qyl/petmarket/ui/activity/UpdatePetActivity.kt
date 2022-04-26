@@ -6,7 +6,6 @@ import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
 import com.qyl.petmarket.R
 import com.qyl.petmarket.data.bean.PetBean
-import com.qyl.petmarket.databinding.ActivityAddPetBinding
 import com.qyl.petmarket.databinding.ActivityUpdatePetBinding
 import com.qyl.petmarket.databinding.DialogChooseDateBinding
 import com.qyl.petmarket.net.config.SysNetConfig
@@ -18,7 +17,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import okhttp3.MultipartBody
 
 
 class UpdatePetActivity : BaseAddPhotoActivity<ActivityUpdatePetBinding>() {

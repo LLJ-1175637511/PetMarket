@@ -6,11 +6,8 @@ import android.net.Uri
 import android.os.Build
 import android.os.Environment
 import android.provider.Settings
-import android.widget.ImageView
-import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.databinding.ViewDataBinding
-import com.bumptech.glide.Glide
 import com.qyl.petmarket.net.NetActivity
 import com.qyl.petmarket.utils.ToastUtils
 

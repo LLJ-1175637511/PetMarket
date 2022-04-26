@@ -13,14 +13,6 @@ import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
-import androidx.lifecycle.lifecycleScope
-import com.qyl.petmarket.ext.*
-import com.qyl.petmarket.net.BaseBean
-import com.qyl.petmarket.utils.Const
-import com.qyl.petmarket.utils.ECLib
-import com.qyl.petmarket.utils.LogUtils
-import com.qyl.petmarket.utils.ToastUtils
-import kotlinx.coroutines.withContext
 
 abstract class BaseActivity<DB : ViewDataBinding> : AppCompatActivity() {
 

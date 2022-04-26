@@ -25,6 +25,7 @@
         <entry key="app/src/main/res/layout/activity_dynamic_add.xml" value="0.18478260869565216" />
         <entry key="app/src/main/res/layout/activity_dynamic_mine.xml" value="0.18478260869565216" />
         <entry key="app/src/main/res/layout/activity_dynamic_search.xml" value="0.18478260869565216" />
+        <entry key="app/src/main/res/layout/activity_like_record.xml" value="0.19701086956521738" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.15896739130434784" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.15070921985815602" />
         <entry key="app/src/main/res/layout/activity_other_user.xml" value="0.18478260869565216" />
@@ -32,6 +33,8 @@
         <entry key="app/src/main/res/layout/activity_test.xml" value="0.15896739130434784" />
         <entry key="app/src/main/res/layout/activity_update_pet.xml" value="0.18478260869565216" />
         <entry key="app/src/main/res/layout/activity_user.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/activity_user_mine.xml" value="0.1911231884057971" />
+        <entry key="app/src/main/res/layout/activity_user_other.xml" value="0.1911231884057971" />
         <entry key="app/src/main/res/layout/activity_user_revise.xml" value="0.15896739130434784" />
         <entry key="app/src/main/res/layout/custom_big_photo.xml" value="0.18478260869565216" />
         <entry key="app/src/main/res/layout/custom_like_dynamic.xml" value="0.18478260869565216" />
@@ -45,7 +48,11 @@
         <entry key="app/src/main/res/layout/item_dynamic_search.xml" value="0.25" />
         <entry key="app/src/main/res/layout/item_dynamic_square.xml" value="0.2991197668987772" />
         <entry key="app/src/main/res/layout/item_dynamic_user.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/item_like_recard.xml" value="0.18478260869565216" />
+        <entry key="app/src/main/res/layout/item_like_record.xml" value="0.19701086956521738" />
         <entry key="app/src/main/res/layout/item_pet.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/item_pet_mine.xml" value="0.19701086956521738" />
+        <entry key="app/src/main/res/layout/item_pet_other.xml" value="0.3448252360026042" />
         <entry key="app/src/main/res/layout/tab_text.xml" value="0.18478260869565216" />
         <entry key="app/src/main/res/layout/toolbar.xml" value="0.18478260869565216" />
         <entry key="app/src/main/res/menu/bottom_nav_menu.xml" value="0.2953125" />

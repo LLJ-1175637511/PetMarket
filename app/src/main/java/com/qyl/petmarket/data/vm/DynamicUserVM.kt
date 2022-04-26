@@ -5,7 +5,6 @@ import androidx.lifecycle.viewModelScope
 import com.qyl.petmarket.data.bean.DynamicBean
 import com.qyl.petmarket.net.config.SysNetConfig
 import com.qyl.petmarket.net.repository.SystemRepository
-import com.qyl.petmarket.ui.fragment.DynamicFragment
 import kotlinx.coroutines.launch
 
 class DynamicUserVM : NetVM() {

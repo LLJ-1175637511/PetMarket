@@ -16,7 +16,6 @@ class MyPetFragment : BaseBigPhotoFragment<FragmentMyPetBinding>() {
 
     private val vm by viewModels<PetVM>()
 
-
     private val launch =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { ar ->
             if (ar.resultCode != Activity.RESULT_OK) return@registerForActivityResult

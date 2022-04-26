@@ -3,13 +3,12 @@ package com.qyl.petmarket.ui.activity
 import androidx.activity.viewModels
 import com.qyl.petmarket.R
 import com.qyl.petmarket.data.vm.BigPhotoVm
-import com.qyl.petmarket.data.vm.DynamicSquareVM
 import com.qyl.petmarket.data.vm.DynamicUserVM
 import com.qyl.petmarket.databinding.ActivityDynamicMineBinding
 import com.qyl.petmarket.net.NetActivity
 import com.qyl.petmarket.ui.adapter.DynamicOtherRV
 
-class DynamicUserActivity : NetActivity<ActivityDynamicMineBinding>() {
+class MyDynamicActivity : NetActivity<ActivityDynamicMineBinding>() {
 
     override fun getLayoutId() = R.layout.activity_dynamic_mine
 
@@ -27,12 +26,7 @@ class DynamicUserActivity : NetActivity<ActivityDynamicMineBinding>() {
     }
 
     private fun initSearchView() {
-        authorName = intent.getStringExtra(TAG_AUTHOR)
-        if (authorName == null) {
-            mDataBinding.toolbar.toolbarBaseTitle.text = "我的动态"
-        }else{
-            mDataBinding.toolbar.toolbarBaseTitle.text = "${authorName} 的动态"
-        }
+        mDataBinding.toolbar.toolbarBaseTitle.text = "我的动态"
         adapter = DynamicOtherRV(vm, photoVm)
         mDataBinding.recyclerView.adapter = adapter
         photoVm.bigUrl.observe(this) {
@@ -46,9 +40,5 @@ class DynamicUserActivity : NetActivity<ActivityDynamicMineBinding>() {
         vm.searchList.observe(this) {
             adapter.update(it ?: emptyList())
         }
-    }
-
-    companion object {
-        const val TAG_AUTHOR = "tag_author"
     }
 }

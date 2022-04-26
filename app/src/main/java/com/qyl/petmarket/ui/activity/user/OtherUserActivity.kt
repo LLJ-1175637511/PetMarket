@@ -1,64 +1,70 @@
 package com.qyl.petmarket.ui.activity.user
 
-import androidx.lifecycle.lifecycleScope
-import cn.leancloud.LCQuery
-import cn.leancloud.LCUser
+import android.view.View
+import androidx.activity.viewModels
 import com.qyl.petmarket.R
-import com.qyl.petmarket.databinding.ActivityOtherUserBinding
+import com.qyl.petmarket.data.vm.BigPhotoVm
+import com.qyl.petmarket.data.vm.DynamicUserVM
+import com.qyl.petmarket.data.vm.PetVM
+import com.qyl.petmarket.databinding.ActivityUserOtherBinding
 import com.qyl.petmarket.ui.activity.BaseActivity
-import com.qyl.petmarket.utils.LCUtils
+import com.qyl.petmarket.ui.adapter.DynamicOtherRV
+import com.qyl.petmarket.ui.adapter.PetOtherUserRV
 import com.qyl.petmarket.utils.ToastUtils
-import kotlinx.android.synthetic.main.activity_other_user.*
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
-class OtherUserActivity : BaseActivity<ActivityOtherUserBinding>() {
+class OtherUserActivity : BaseActivity<ActivityUserOtherBinding>() {
 
-    override fun getLayoutId() = R.layout.activity_other_user
+    override fun getLayoutId() = R.layout.activity_user_other
 
-    private var objId = ""
+    private lateinit var mDynamicAdapter: DynamicOtherRV
+    private lateinit var mPetAdapter: PetOtherUserRV
+
+    private val dynamicVm by viewModels<DynamicUserVM>()
+    private val petVm by viewModels<PetVM>()
+    private val photoVm by viewModels<BigPhotoVm>()
+
+    private var authorName: String? = null
 
     override fun init() {
         super.init()
+        initMainView()
+        dynamicVm.queryUserDynamic(authorName)
+        petVm.getPetInfo(authorName)
+    }
 
-        objId = intent.getStringExtra(OTHER_USER_ID).toString()
-        if (objId.isEmpty()) {
-            ToastUtils.toastShort("用户ID不能为空")
+    private fun initMainView() {
+        authorName = intent.getStringExtra(TAG_AUTHOR)
+        if (authorName == null) {
+            ToastUtils.toastShort("数据错误")
             finish()
             return
         }
-        mDataBinding.toolbar.toolbarBaseTitle.text = "ta的资料"
-        queryOtherUserInfo()
-        tvLike.setOnClickListener {
+        mDataBinding.toolbar.toolbarBaseTitle.text = "${authorName} 的主页"
+        mDynamicAdapter = DynamicOtherRV(dynamicVm, photoVm)
 
-        }
-        tvDynamic.setOnClickListener {
-
-        }
-
-    }
-
-    private fun queryOtherUserInfo() {
-        val userObj = LCQuery<LCUser>("_User")
-        lifecycleScope.launch {
-            val user = withContext(Dispatchers.IO) {
-
-                userObj.get(objId)
+        mDataBinding.rvDynamic.adapter = mDynamicAdapter
+        photoVm.bigUrl.observe(this) {
+            if (it == null) {
+                mDataBinding.flBG.hide()
+                return@observe
             }
-            val text =
-                "${user.getString(LCUtils.LCUserSex)}    ${user.get(LCUtils.LCUserAge)}   |   ${
-                    user.getString(
-                        LCUtils.LCUserAddress
-                    )
-                }"
-            mDataBinding.tvUserInfo.text = text
-            mDataBinding.tvLikeCount.text = user.getString(LCUtils.LCUserLikeCount)
-            mDataBinding.tvUserName.text = user.getString(LCUtils.LCUserAlias)
+            mDataBinding.flBG.loadBigPhoto(it)
+        }
+        petVm.petList.observe(this) { pList ->
+            if (pList != null && pList.isNotEmpty()) {
+                mDataBinding.rvPet.visibility = View.VISIBLE
+                mPetAdapter = PetOtherUserRV(pList) {
+                    photoVm.bigUrl.postValue(it)
+                }
+                mDataBinding.rvPet.adapter = mPetAdapter
+            }
+        }
+        dynamicVm.searchList.observe(this) {
+            mDynamicAdapter.update(it ?: emptyList())
         }
     }
 
     companion object {
-        const val OTHER_USER_ID = "other_user_id"
+        const val TAG_AUTHOR = "tag_author"
     }
 }

@@ -3,7 +3,6 @@ package com.qyl.petmarket.ui.activity
 import androidx.activity.viewModels
 import com.qyl.petmarket.R
 import com.qyl.petmarket.data.vm.BigPhotoVm
-import com.qyl.petmarket.data.vm.DynamicSquareVM
 import com.qyl.petmarket.data.vm.DynamicUserVM
 import com.qyl.petmarket.databinding.ActivityDynamicSearchBinding
 import com.qyl.petmarket.net.NetActivity
