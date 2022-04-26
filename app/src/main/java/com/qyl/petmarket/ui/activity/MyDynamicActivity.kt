@@ -6,6 +6,7 @@ import com.qyl.petmarket.data.vm.BigPhotoVm
 import com.qyl.petmarket.data.vm.DynamicUserVM
 import com.qyl.petmarket.databinding.ActivityDynamicMineBinding
 import com.qyl.petmarket.net.NetActivity
+import com.qyl.petmarket.net.config.SysNetConfig
 import com.qyl.petmarket.ui.adapter.DynamicOtherRV
 
 class MyDynamicActivity : NetActivity<ActivityDynamicMineBinding>() {
@@ -17,12 +18,10 @@ class MyDynamicActivity : NetActivity<ActivityDynamicMineBinding>() {
     private val vm by viewModels<DynamicUserVM>()
     private val photoVm by viewModels<BigPhotoVm>()
 
-    private var authorName: String? = null
-
     override fun init() {
         super.init()
         initSearchView()
-        vm.queryUserDynamic(authorName)
+        vm.queryUserDynamic(SysNetConfig.getUserName())
     }
 
     private fun initSearchView() {
