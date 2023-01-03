@@ -8,6 +8,7 @@ import com.bumptech.glide.Glide
 import com.qyl.petmarket.R
 import com.qyl.petmarket.data.bean.PetBean
 import com.qyl.petmarket.databinding.ItemPetOtherBinding
+import com.qyl.petmarket.utils.CommonUtils
 import com.qyl.petmarket.utils.convertGeLinTime
 
 class PetOtherUserRV(
@@ -18,7 +19,7 @@ class PetOtherUserRV(
     inner class Holder(val binding: ItemPetOtherBinding) : RecyclerView.ViewHolder(binding.root) {
 
         fun bindData(item: PetBean) {
-            val url = "http://47.110.231.180:8080${item.petPicture}"
+            val url = CommonUtils.convertUrl(item.petPicture)
             Glide.with(binding.root.context).load(url).into(binding.ivPhoto)
             binding.tvLike.text = "喜好：${item.like}"
             binding.tvTaboo.text = "禁忌：${item.taboo}"

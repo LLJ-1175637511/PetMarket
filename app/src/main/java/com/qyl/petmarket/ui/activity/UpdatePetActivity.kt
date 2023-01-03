@@ -10,6 +10,7 @@ import com.qyl.petmarket.databinding.ActivityUpdatePetBinding
 import com.qyl.petmarket.databinding.DialogChooseDateBinding
 import com.qyl.petmarket.net.config.SysNetConfig
 import com.qyl.petmarket.net.repository.SystemRepository
+import com.qyl.petmarket.utils.CommonUtils
 import com.qyl.petmarket.utils.ToastUtils
 import com.qyl.petmarket.utils.addZero
 import com.qyl.petmarket.utils.convertGeLinTime
@@ -48,7 +49,7 @@ class UpdatePetActivity : BaseAddPhotoActivity<ActivityUpdatePetBinding>() {
         mDataBinding.btAddPey.setOnClickListener {
             updatePet()
         }
-        val url = "http://47.110.231.180:8080${petBean.petPicture}"
+        val url = CommonUtils.convertUrl(petBean.petPicture)
         Glide.with(this).load(url).into(mDataBinding.ivPetIPhoto)
 
         buildLaunch {

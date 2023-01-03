@@ -19,6 +19,9 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
         <activity
+            android:name=".ui.activity.user.NetActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.activity.user.ChooseHobbyActivity"
             android:exported="false" />
         <activity

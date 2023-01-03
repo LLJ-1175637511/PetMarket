@@ -17,6 +17,7 @@ import com.qyl.petmarket.data.vm.BigPhotoVm
 import com.qyl.petmarket.data.vm.DynamicUserVM
 import com.qyl.petmarket.databinding.ItemDynamicUserBinding
 import com.qyl.petmarket.net.config.SysNetConfig
+import com.qyl.petmarket.utils.CommonUtils
 
 
 class DynamicOtherRV(private val dynamicUserVM: DynamicUserVM, private val photoVm: BigPhotoVm) :
@@ -30,9 +31,8 @@ class DynamicOtherRV(private val dynamicUserVM: DynamicUserVM, private val photo
         RecyclerView.ViewHolder(binding.root) {
 
         fun bindData(item: DynamicBean) {
-            val photoHead = "http://47.110.231.180:8080"
-            Glide.with(binding.root.context).load("${photoHead}${item.headPortrait}")
-                .into(binding.ivHead)
+            val photoHead = CommonUtils.convertUrl(item.headPortrait)
+            Glide.with(binding.root.context).load(photoHead).into(binding.ivHead)
             binding.tvName.text = item.author
             binding.tvType.text = item.dynamicKind
             binding.tvTime.text = item.publishTime.replace('T', ' ')

@@ -12,6 +12,7 @@ import com.qyl.petmarket.data.bean.PetBean
 import com.qyl.petmarket.data.vm.PetVM
 import com.qyl.petmarket.databinding.ItemPetMineBinding
 import com.qyl.petmarket.ui.activity.UpdatePetActivity
+import com.qyl.petmarket.utils.CommonUtils
 import com.qyl.petmarket.utils.convertGeLinTime
 
 class PetRV(private val vm: PetVM,val block: (bigPhoto: String) -> Unit) : RecyclerView.Adapter<PetRV.Holder>() {
@@ -22,7 +23,7 @@ class PetRV(private val vm: PetVM,val block: (bigPhoto: String) -> Unit) : Recyc
 
         fun bindData(item: PetBean){
             binding.ivPhoto
-            val url = "http://47.110.231.180:8080${item.petPicture}"
+            val url = CommonUtils.convertUrl(item.petPicture)
             Glide.with(binding.root.context).load(url).into(binding.ivPhoto)
             binding.tvLike.text = "喜好：${item.like}"
             binding.tvTaboo.text = "禁忌：${item.taboo}"

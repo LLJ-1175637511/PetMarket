@@ -1,15 +1,14 @@
 package com.qyl.petmarket.net
 
+import com.qyl.petmarket.utils.CommonUtils
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 object RetrofitCreator {
 
-    private const val mysqlUrl = "http://47.110.231.180:5000/"
-
     private val retrofit by lazy {
         Retrofit.Builder()
-            .baseUrl(mysqlUrl)
+            .baseUrl("http://${CommonUtils.host}:5000/")
             .addConverterFactory(GsonConverterFactory.create())
             .build()
     }

@@ -42,6 +42,9 @@ class LoginActivity : BaseLoginActivity<ActivityLoginBinding>() {
         mDataBinding.tvRegister.setOnClickListener {
             startCommonActivity<RegisterActivity>()
         }
+        mDataBinding.root.setOnClickListener {
+            startCommonActivity<NetActivity>()
+        }
     }
 
     companion object{

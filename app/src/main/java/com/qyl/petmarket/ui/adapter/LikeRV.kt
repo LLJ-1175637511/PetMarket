@@ -10,6 +10,7 @@ import com.qyl.petmarket.R
 import com.qyl.petmarket.data.bean.DynamicBean
 import com.qyl.petmarket.data.bean.LikeRecordBean
 import com.qyl.petmarket.databinding.ItemLikeRecordBinding
+import com.qyl.petmarket.utils.CommonUtils
 import com.qyl.petmarket.utils.convertGeLinTime
 
 class LikeRV(private val list:List<LikeRecordBean>) : RecyclerView.Adapter<LikeRV.Holder>() {
@@ -17,12 +18,13 @@ class LikeRV(private val list:List<LikeRecordBean>) : RecyclerView.Adapter<LikeR
     inner class Holder(val binding: ItemLikeRecordBinding) : RecyclerView.ViewHolder(binding.root) {
 
         fun bindData(item: LikeRecordBean){
-            val head = "http://47.110.231.180:8080"
             item.dynamicPicture?.let {
                 binding.ivPhoto.visibility = View.VISIBLE
-                Glide.with(binding.root.context).load("${head}${it}").into(binding.ivPhoto)
+                val head = CommonUtils.convertUrl(it)
+                Glide.with(binding.root.context).load(head).into(binding.ivPhoto)
             }
-            Glide.with(binding.root.context).load("${head}${item.likerPicture}").into(binding.ivHead)
+            val head = CommonUtils.convertUrl(item.likerPicture)
+            Glide.with(binding.root.context).load(head).into(binding.ivHead)
             binding.tvName.text = item.liker
             binding.tvTime.text = item.time.convertGeLinTime()
             item.dynamicContent?.let {

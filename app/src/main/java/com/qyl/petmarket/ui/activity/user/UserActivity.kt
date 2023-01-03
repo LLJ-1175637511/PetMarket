@@ -8,6 +8,7 @@ import com.qyl.petmarket.R
 import com.qyl.petmarket.data.bean.LoginBean
 import com.qyl.petmarket.databinding.ActivityUserMineBinding
 import com.qyl.petmarket.net.NetActivity
+import com.qyl.petmarket.utils.CommonUtils
 
 class UserActivity : NetActivity<ActivityUserMineBinding>() {
 
@@ -48,7 +49,7 @@ class UserActivity : NetActivity<ActivityUserMineBinding>() {
             hobby += "$it "
         }
         mDataBinding.tvHobby.text = "喜好：$hobby"
-        val url = "http://47.110.231.180:8080${data.headPortrait}"
+        val url = CommonUtils.convertUrl(data.headPortrait)
         Glide.with(this).load(url).into(mDataBinding.ivHead)
     }
 

@@ -8,6 +8,7 @@ import com.qyl.petmarket.net.NetFragment
 import com.qyl.petmarket.ui.activity.LikeRecordActivity
 import com.qyl.petmarket.ui.activity.MyDynamicActivity
 import com.qyl.petmarket.ui.activity.user.UserActivity
+import com.qyl.petmarket.utils.CommonUtils
 
 class UserMineFragment : NetFragment<FragmentUserBinding>() {
 
@@ -44,7 +45,7 @@ class UserMineFragment : NetFragment<FragmentUserBinding>() {
         mDataBinding.tvLike.text = "点赞记录：（${data.likedNums}）"
         mDataBinding.tvDynamic.text = "我的动态：（${data.dynamicNum}）"
         mDataBinding.tvUserName.text = data.userName
-        val url = "http://47.110.231.180:8080${data.headPortrait}"
+        val url = CommonUtils.convertUrl(data.headPortrait)
         Glide.with(this).load(url).into(mDataBinding.ivHead)
     }
 }

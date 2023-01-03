@@ -13,6 +13,7 @@ import com.qyl.petmarket.data.bean.DynamicBean
 import com.qyl.petmarket.data.vm.DynamicSquareVM
 import com.qyl.petmarket.databinding.ItemDynamicSquareBinding
 import com.qyl.petmarket.ui.activity.user.OtherUserActivity
+import com.qyl.petmarket.utils.CommonUtils
 
 class DynamicSquareRV(
     private val squareVm: DynamicSquareVM,
@@ -27,8 +28,8 @@ class DynamicSquareRV(
 
         @SuppressLint("UseCompatLoadingForDrawables")
         fun bindData(item: DynamicBean) {
-            val photoHead = "http://47.110.231.180:8080"
-            Glide.with(binding.root.context).load("${photoHead}${item.headPortrait}")
+            val photoHead = CommonUtils.convertUrl(item.headPortrait)
+            Glide.with(binding.root.context).load(photoHead)
                 .into(binding.ivHead)
             binding.tvName.text = item.author
             binding.tvTime.text = item.publishTime.replace('T', ' ')
@@ -38,7 +39,7 @@ class DynamicSquareRV(
                 binding.tvContent.text = it
             }
             item.dynamicPicture?.let {
-                val u = "${photoHead}${it}"
+                val u = CommonUtils.convertUrl(it)
                 binding.ivPhoto.visibility = View.VISIBLE
                 Glide.with(binding.root.context).load(u).into(binding.ivPhoto)
                 binding.ivPhoto.setOnClickListener {
